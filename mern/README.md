@@ -1,6 +1,9 @@
 # Usage
-You're gonna want to open up two terminals. One in '../mern/server' and the other in '../mern/campusdate':
-In the '../mern/server' run 'node server.js'
+You're gonna want to open up two terminals. One in '../mern/server' and the other in '../mern/campusdate'.
+In the '../mern/server' run 
+```bash 
+node server.js
+```
 Your terminal should say 
 ```bash
 Server is running on port: 5000

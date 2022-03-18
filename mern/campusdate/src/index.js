@@ -4,9 +4,22 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Login from "./components/login/login.component";
+import Profile from "./components/profile/profile.component";
+import EditProfile from "./components/editprofile/editprofile.component";
+
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+  <BrowserRouter>
+  <Routes>
+    <Route path="/" element={<App />} />
+    <Route path="login" element={<Login />} />
+    <Route path="profile" element={<Profile />} />
+    <Route path="editprofile" element={<EditProfile />} />
+  </Routes>
+  </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );

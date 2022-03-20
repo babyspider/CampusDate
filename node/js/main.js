@@ -1,8 +1,11 @@
 const mongoose = require('mongoose');
 const { uri, host, port, user, pass, db} = require('./config.json');
 //main().catch(err => console.log(err));
+var util            = require('util');
+var fs              = require('fs');
 
-const functionFiles = 
+
+const functionFiles = fs.readdirSync('../resources').filter(file => file.endsWith('.js'));
 
 function Base(base){
   this.base = base;
@@ -25,8 +28,10 @@ util.inherits(Init,Base);
 
 Init.prototype.run = function(){
   for(const file of functionFiles){
-
+    //load in each function
   }
+  
+  
 }
 
 async function main() {

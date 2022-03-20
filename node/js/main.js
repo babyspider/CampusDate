@@ -1,90 +1,33 @@
-/*
-//Connection URL
-const {uri} = require('./config.json');
-
-//Client
-const client = new MongoClient(uri,
-	{
-		serverApi: {
-			version: ServerApiVersion.v1,
-			strict: true,
-			deprecationErrors: true,
-		}
-	});
-
-
-async function run() {
-  try {
-    // Connect the client to the server
-    console.log("Connecting");
-    await client.connect();
-    console.log("Connecting to database");
-    // Establish and verify connection
-    await client.db("campusdate").command({ ping: 1 });
-    console.log("Connected successfully to server");
-  } finally {
-    // Ensures that the client will close when you finish/error
-    console.log("Connection closed");
-    await client.close();
-  }
-}
-
-//run();
-//console.log("Test");
-*/
-/*const { MongoClient, ServerApiVersion } = require("mongodb");
-const mongodb = require("mongo-ssh");
-
-async function init(){
-  let connection;
-  let collections = [];
-  let databases = [];
-  try {
-    //Configure connection
-    connection = await mongodb.connect(
-      {
-        host: `${host}`,
-        port: 220,
-        user: `${user}`,
-        password: `${pass}`,
-      },
-      {
-        host: "127.0.0.1",
-        port: 27017,
-        user: "campusdate",
-        password: `${pass}`,
-        database: `${db}`
-      }
-    );
-
-    databases = await connection.client.db("root").admin().listDatabases();
-    await connection.client.db(`${db}`).listCollections().toArray()
-      .then(data=>{
-        data.forEach(item => collections.push(item.name));
-      }).catch(err=>{
-        console.error("Database read error.");
-        throw err;
-      });
-      console.log("Databases: ",databases);
-      console.log("Collections: ",collections);
-  } catch (err) {
-    console.error(err);
-  } finally {
-    if (connection) {
-      try {
-        await connection.close();
-      } catch (err) {
-        throw err;
-      }
-    }
-  }
-}*/
-
-//init();
-
 const mongoose = require('mongoose');
 const { uri, host, port, user, pass, db} = require('./config.json');
-main().catch(err => console.log(err));
+//main().catch(err => console.log(err));
+
+const functionFiles = 
+
+function Base(base){
+  this.base = base;
+}
+
+Base.prototype.__defineSetter__('type',function(type){
+  Object.defineProperty(this, 'constructor', {
+    value: module.exports[type],
+    enumarable: false
+  });
+  this.__proto__=module.exports[type].prototype;
+});
+
+function Init(app){
+  this.app = app;
+}
+
+module.exports.Base = Base;
+util.inherits(Init,Base);
+
+Init.prototype.run = function(){
+  for(const file of functionFiles){
+
+  }
+}
 
 async function main() {
 

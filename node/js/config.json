@@ -1,0 +1,8 @@
+{
+	"uri" : "mongodb://campusdate:rpisdd2022rpisdd2022@apollo.arcator.co.uk:220/?maxPoolSize=20&w=majority&connectTimeoutMS=1000",
+	"host": "apollo.arcator.co.uk",
+	"port": 220,
+	"user": "campusdate",
+	"pass": "rpisdd2022rpisdd2022",
+	"db"  : "campusdate"
+}

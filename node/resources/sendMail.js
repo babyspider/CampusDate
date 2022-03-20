@@ -1,4 +1,4 @@
-const {host, user, pass} = require('./config.json');
+const {email_host, email_user, email_pass} = require('./config.json');
 
 module.exports = {
 	name: 			'sendMail',

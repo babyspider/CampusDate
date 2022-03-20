@@ -92,9 +92,8 @@ export default function EditProfile() {
          </ToggleButton>
          ))}
          </ButtonGroup>
-         </Container>
+         </Container>         
             <Button type="submit">Confirm Changes</Button>
-
          </Form>
 
 

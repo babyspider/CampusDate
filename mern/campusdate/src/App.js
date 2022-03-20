@@ -1,24 +1,72 @@
 import logo from './logo.svg';
 import './App.css';
 
-import React, { Component } from 'react';
+import * as React from 'react';
+import { Component, Navigation } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Link } from "react-router-dom";
 
+// import * as React from 'react';
+import { Text, View, StyleSheet, Pressable, Button, Alert} from 'react-native';
+import Constants from 'expo-constants';
 
+// import { NavigationContainer } from 'react-navigation/native';
+// import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 class App extends Component {
   render() {
+
+const styles = StyleSheet.create({
+  buttons:{
+    borderRadius: 20,
+    borderColor:'grey',
+    marginTop:'5%',
+    marginHorizontal:"20%",
+    textAlign: 'center',
+    borderWidth: 2,
+  },
+  buttonsText:{
+    margin:'1%',
+    textAlign: 'center',
+    color:'grey',
+    fontSize:25,
+  },
+  background: {
+    flex: 1,
+    justifyContent: 'center',
+    backgroundColor: 'pink',
+    padding: 8,
+  },
+  title: {
+    backgroundColor:'none',
+    margin: 1,
+    fontSize: 50,
+    color: 'grey',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+});
+
     return (
-      <div>"Welcome to the CampusDate prototypes!"
-      <nav class="navbar navbar-expand-lg">
-        <Link class="nav-link" to="/login">Login</Link> {" "}
-        <Link class="nav-link" to="/profile">Profile</Link> {" "}
-        <Link class="nav-link" to="/editprofile">Edit Profile</Link></nav>
-      </div> 
-    );
-  }
-}
+    <View style={styles.background}>
+      <Text style={styles.title}>CampusDate</Text>
+      
+      <Link to="/editprofile">
+      <Pressable style={styles.buttons} onPress={() => Alert.alert('Signing Up')}>
+      <Text style={styles.buttonsText}>Sign Up</Text>
+      </Pressable>
+      </Link>
+        
+      <Link to="/login">
+      <Pressable style={styles.buttons}>
+      <Text style={styles.buttonsText}>Log In</Text>
+      </Pressable>
+      </Link>
+
+    </View>
+  );
+}}
+
 
 export default App;

@@ -8,6 +8,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./components/login/login.component";
 import Profile from "./components/profile/profile.component";
 import EditProfile from "./components/editprofile/editprofile.component";
+import Chat from "./components/chat/chat.component";
+
 
 ReactDOM.render(
   <React.StrictMode>
@@ -17,6 +19,7 @@ ReactDOM.render(
     <Route path="login" element={<Login />} />
     <Route path="profile" element={<Profile />} />
     <Route path="editprofile" element={<EditProfile />} />
+    <Route path="chat" element={<Chat />} />
   </Routes>
   </BrowserRouter>
   </React.StrictMode>,

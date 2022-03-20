@@ -18,6 +18,7 @@ export default function App() {
       <TextInput
         style={styles.inputbox}
         placeholder="email"
+        keyboardType = "email-address"
       />
 
       <TextInput

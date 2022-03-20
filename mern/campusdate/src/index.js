@@ -9,7 +9,6 @@ import Login from "./components/login/login.component";
 import Profile from "./components/profile/profile.component";
 import EditProfile from "./components/editprofile/editprofile.component";
 
-
 ReactDOM.render(
   <React.StrictMode>
   <BrowserRouter>

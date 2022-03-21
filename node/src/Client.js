@@ -1,9 +1,10 @@
-
-
-
 class Client {
 	constructor(options){
-		super(options);
+		this.options = options;
+	}
+
+	logout(){
+
 	}
 
 }

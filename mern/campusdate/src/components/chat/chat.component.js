@@ -6,45 +6,49 @@ import {
   ScrollView,
   Pressable,
   Alert,
-  Image
+  Dimensions,
+  Image,
 } from 'react-native';
 import Constants from 'expo-constants';
 
+const screenWidth = Dimensions.get('screen').width;
+const screenHeight = Dimensions.get('screen').height;
+
 export default function App() {
   return (
-    <View style={styles.background}>
-     <ScrollView>
-      <Text style={styles.emailBoxes}>
-      filleremail@emailhost.com
-      </Text>
-      </ScrollView>
-          <View style={{ flexDirection:"row", marginLeft: 0, marginRight:"auto" }}>
-          <Pressable
-            style = {styles.menuButtons}
-            onPress={() => Alert.alert('Setting Menu Button')}>
-              <Image source={require('../assets/settingIcon.png')} style = {styles.iconButtons} />
-          </Pressable>
-          <Pressable
-            style = {styles.menuButtons}
-            onPress={() => Alert.alert('Profile Menu Button')}>
-              <Image source={require('../assets/profileIcon.png')} style = {styles.iconButtons} />
-          </Pressable>
-          <Pressable
-            style = {styles.menuButtons}
-            onPress={() => Alert.alert('Chat Menu Button')}>
-              <Image source={require('../assets/chatIcon.png')} style = {styles.iconButtons} />
-          </Pressable> 
-        </View>
+    <View style={{backgroundColor:'#FECCC4', width: screenWidth, height: screenHeight }}>
+
+      <View style = {{height: screenHeight/1.6}}>  
+        <ScrollView>
+          <Text style={styles.emailBoxes}>
+            filleremail@emailhost.com
+          </Text>
+        </ScrollView>
+      </View>
+
+      <View style={{ flexDirection:"row", marginLeft: 0, marginRight:"auto" }}>
+        <Pressable
+          style = {styles.menuButtons}
+          onPress={() => Alert.alert('Setting Menu Button')}>
+          <Image source={require('./assets/settingIcon.png')} style = {styles.iconButtons} />
+        </Pressable>
+        <Pressable
+          style = {styles.menuButtons}
+          onPress={() => Alert.alert('Profile Menu Button')}>
+          <Image source={require('./assets/profileIcon.png')} style = {styles.iconButtons} />
+        </Pressable>
+        <Pressable
+          style = {styles.menuButtons}
+          onPress={() => Alert.alert('Chat Menu Button')}>
+          <Image source={require('./assets/chatIcon.png')} style = {styles.iconButtons} />
+        </Pressable> 
+      </View>
+      
     </View>
 
   );
 }
 const styles = StyleSheet.create({
-  background: {
-    flex: 1,
-    paddingTop: 25,
-    backgroundColor: 'pink',
-  },
   emailBoxes: {
     padding: 20,
     fontSize: 20,
@@ -56,15 +60,17 @@ const styles = StyleSheet.create({
     borderColor:'#FECCC4', 
     borderWidth:1, 
     backgroundColor:'#FECCC4', 
-    width: '33vw',
-    height: '5vh',
-    top: '3.5vh',
+    width: screenWidth/3,
+    height: screenHeight/5,
+    top: screenHeight/3.5,
     position: 'relative',
 
   },
 iconButtons:{
-  width: '6vw',
-  height: '6vw',
-  left: '15vw',
+  width: screenWidth/6,
+  height: screenWidth/6,
+  left: screenWidth/15,
 }
 });
+
+

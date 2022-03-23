@@ -1,25 +1,26 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-export default class Matches extends Component {
+export default class GetMatches extends Component {
     constructor(props) {
         super(props);
         this.state = { matchesCollection: {} };
     }
     componentDidMount() {
-        axios.get('http://localhost:4000/matches')
+        axios.get('http://localhost:5000/matches')
             .then(res => {
-                this.setState({ matchesCollection: res.data });
+                this.setState({ matchesCollection : res.data });
+                console.log(this.state)
+                console.log(res.data)
             })
             .catch(function (error) {
                 console.log(error);
             })
-        console.log(this.matchesCollection);
     }
     
 
     render() {
         return (
-            <div>Matches?:{this.atchesCollection}</div>
+            <div>Matches?:</div>
 
         )
     }

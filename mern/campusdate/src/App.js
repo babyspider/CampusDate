@@ -15,7 +15,8 @@ class App extends Component {
       <nav class="navbar navbar-expand-lg">
         <Link class="nav-link" to="/login">Login</Link> {" "}
         <Link class="nav-link" to="/profile">Profile</Link> {" "}
-        <Link class="nav-link" to="/test">Testing Express</Link> 
+        <Link class="nav-link" to="/test1">Testing mongoGet</Link>
+        <Link class="nav-link" to="/test2">Testing mongoPost</Link>  
         <Link class="nav-link" to="/editprofile">Edit Profile</Link></nav>
       </div> 
     );

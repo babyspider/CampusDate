@@ -4,7 +4,7 @@ let cors = require('cors');
 let bodyParser = require('body-parser');
 const matchRoute = require('../server/routes/match.routes')
 mongoose
-  .connect('mongodb+srv://campusdate:rpisdd2022rpisdd2022@campusdate.z8qxu.mongodb.net/campusdate')
+  .connect('mongodb+srv://campusdate:rpisdd2022rpisdd2022@campusdate.z8qxu.mongodb.net/campusdate?retryWrites=true&w=majority')
   .then((x) => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })

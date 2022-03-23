@@ -30,21 +30,6 @@ export default class CreateMatch extends Component {
 
     render() {
         return (
-            // <div className="wrapper">
-            //     <form onSubmit={this.onSubmit}>
-            //         <div className="form-group">
-            //             <label>Add User Name</label>
-            //             <input type="text" value={this.state.name} onChange={this.onChangeUserName} className="form-control" />
-            //         </div>
-            //         <div className="form-group">
-            //             <label>Add User Email</label>
-            //             <input type="text" value={this.state.email} onChange={this.onChangeUserEmail} className="form-control" />
-            //         </div>
-            //         <div className="form-group">
-            //             <input type="submit" value="Create User" className="btn btn-success btn-block" />
-            //         </div>
-            //     </form>
-            // </div>
             <button onClick={this.addMatch}>hit me</button>
         )
     }

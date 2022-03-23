@@ -8,15 +8,17 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./components/login/login.component";
 import Profile from "./components/profile/profile.component";
 import EditProfile from "./components/editprofile/editprofile.component";
+import Test from "./components/expresstesting/routerTest"
 
 
 ReactDOM.render(
   <React.StrictMode>
   <BrowserRouter>
   <Routes>
-    <Route path="/" element={<App />} />
+    <Route path="/" element={<App />} />  
     <Route path="login" element={<Login />} />
     <Route path="profile" element={<Profile />} />
+    <Route path="test" element={<Test />} /> 
     <Route path="editprofile" element={<EditProfile />} />
   </Routes>
   </BrowserRouter>

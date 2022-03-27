@@ -1,0 +1,47 @@
+body {
+  margin: 0;
+  background-color: pink;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.hobbyaccordion {
+  height: 30vh;
+}
+
+.profileimages-container
+{
+    height: 30vh;
+    overflow: visible;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space:nowrap;
+    background-color: white;
+}
+
+.profileimages-image{
+    /*display: inline-block;*/
+    /*height: inherit;*/
+    /*margin: 0.5vw;*/
+    /*position: relative;*/
+    /*float: left;*/
+}
+
+.profileimages-select{
+    display: inline-block;
+    height: 28vh;
+    width:  28vh;
+    /*overflow: inherit;*/
+    /*margin: 0.5vw;*/
+    /*white-space:nowrap;*/
+    /*position: relative;*/
+    /*float: left;*/
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}

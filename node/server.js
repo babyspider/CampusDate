@@ -11,10 +11,10 @@ app.get('/express_backend', (req,res) =>{
 });
 
 app.post('/resources/mail', function(req,res) {
-	//var recipient = req...
-	//var subject = req...
-	//var body = req...
+	var recipient = req.body.recipient.toString();
+	var subject = req.body.subject.toString();
+	var body = req.body.body.toString();
 
-	//mail.execute(recipient,subject,body);
-
+	res.send('POST request to sendMail');
+	mail.execute(recipient,subject,body);
 });

@@ -30,17 +30,17 @@ export default function App() {
         <Pressable
           style = {styles.menuButtons}
           onPress={() => Alert.alert('Setting Menu Button')}>
-          <Image source={require('./assets/settingIcon.png')} style = {styles.iconButtons} />
+          <Image source={require('../assets/settingIcon.png')} style = {styles.iconButtons} />
         </Pressable>
         <Pressable
           style = {styles.menuButtons}
           onPress={() => Alert.alert('Profile Menu Button')}>
-          <Image source={require('./assets/profileIcon.png')} style = {styles.iconButtons} />
+          <Image source={require('../assets/profileIcon.png')} style = {styles.iconButtons} />
         </Pressable>
         <Pressable
           style = {styles.menuButtons}
           onPress={() => Alert.alert('Chat Menu Button')}>
-          <Image source={require('./assets/chatIcon.png')} style = {styles.iconButtons} />
+          <Image source={require('../assets/chatIcon.png')} style = {styles.iconButtons} />
         </Pressable> 
       </View>
       

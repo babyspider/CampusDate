@@ -10,10 +10,10 @@ export default class GetMatches extends Component {
             .then(res => {
                 this.setState({ matchesCollection : res.data });
                 console.log(this.state)
-                console.log(res.data)
+                //console.log(res.data)
             })
             .catch(function (error) {
-                console.log(error);
+                console.log("ERORRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRORRRRRRRRRRRRRRRRRRRRRRRRRR");
             })
     }
     

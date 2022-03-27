@@ -10,5 +10,11 @@ app.get('/express_backend', (req,res) =>{
 	res.send({ express: 'Backend connected to React' });
 });
 
+app.post('/resources/mail', function(req,res) {
+	//var recipient = req...
+	//var subject = req...
+	//var body = req...
 
-//mail.execute('recipient@email','subject','body');
+	//mail.execute(recipient,subject,body);
+
+});

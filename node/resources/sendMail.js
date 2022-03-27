@@ -6,7 +6,7 @@ module.exports = {
 	description: 	'Given arguments, this should send an email to the desired address via the email listed in config.json',
 	active: 		true,
 	usage: 			`Object.sendMail(recipient,subject,body)`,
-	async execute(client, recipient, subject, body){
+	async execute(recipient, subject, body){
 		var transporter = nodemailer.createTransport({
 			service: `${email_host}`,
 			auth: {

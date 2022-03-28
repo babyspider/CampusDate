@@ -12,14 +12,17 @@ import CreateProfile from "./components/createprofile/createprofile.component";
 import Chat from "./components/chat/chat.component";
 import Matches from "./components/matches/matches.component";
 import GetMatches from "./components/routeTesting/get-match"
+import PostMatches from "./components/routeTesting/create-match"
 
 ReactDOM.render(
   <React.StrictMode>
   <BrowserRouter>
   <Routes>
-    <Route path="/" element={<App />} />
+    <Route path="/" element={<App />} />  
     <Route path="login" element={<Login />} />
     <Route path="profile" element={<Profile />} />
+    <Route path="test1" element={<GetMatches />} /> 
+    <Route path="test2" element={<PostMatches />} /> 
     <Route path="editprofile" element={<EditProfile />} />
     <Route path="createprofile" element={<CreateProfile />} />
     <Route path="matches" element={<Matches />} />

@@ -13,16 +13,16 @@ const ObjectId = require("mongodb").ObjectId;
 
 
 // This section returns the matches from the db
-matchRoutes.get("/data/matches", (req, res)=> {
-  let db_connect = dbo.getDb("campusdate");
-  db_connect
-    .collection("matches")
-    .find({},{ projection:{is_match : true}})
-    .toArray(function (err, result) {
-      if (err) throw err;
-      res.json(result);
-    });
-});
+// matchRoutes.get("/data/matches", (req, res)=> {
+//   let db_connect = dbo.getDb("campusdate");
+//   db_connect
+//     .collection("matches")
+//     .find({},{ projection:{is_match : true}})
+//     .toArray(function (err, result) {
+//       if (err) throw err;
+//       res.json(result);
+//     });
+// });
 
 // This section will help you get a single record by id
 matchRoutes.get("/data/:id", (req, res) => {
@@ -98,39 +98,39 @@ matchRoutes.get("/test",(res) => {
 
 
 
-matchRoutes
-.route("/data")
-.get( (req,res)  => {
-  let db_connect = dbo.getDb("campusdate");
-  db_connect
-    .collection("matches")
-    .find({},{ projection:{is_match : true}})
-    .toArray(function (err, result) {
-      if (err) throw err;
-      res.json(result);
-    });
-})
-.post( (req,res) => {
-  let db_connect = dbo.getDb();
-  let myobj = {
-    from_email: req.body.from_email,
-    to_email: req.body.to_email,
-    is_match: req.body.is_match,
-  };
-  db_connect.collection("records").insertOne(myobj, function (err, res) {
-    if (err) throw err;
-    response.json(res);
-  });
-})
-.delete( (req,res) =>{
-  let db_connect = dbo.getDb();
-  let myquery = { _id: ObjectId( req.params.id )};
-  db_connect.collection("records").deleteOne(myquery, function (err, obj) {
-    if (err) throw err;
-    console.log("1 document deleted");
-    response.json(obj);
-  });
-});
+// matchRoutes
+// .route("/data")
+// .get( (req,res)  => {
+//   let db_connect = dbo.getDb("campusdate");
+//   db_connect
+//     .collection("matches")
+//     .find({},{ projection:{is_match : true}})
+//     .toArray(function (err, result) {
+//       if (err) throw err;
+//       res.json(result);
+//     });
+// })
+// .post( (req,res) => {
+//   let db_connect = dbo.getDb();
+//   let myobj = {
+//     from_email: req.body.from_email,
+//     to_email: req.body.to_email,
+//     is_match: req.body.is_match,
+//   };
+//   db_connect.collection("records").insertOne(myobj, function (err, res) {
+//     if (err) throw err;
+//     response.json(res);
+//   });
+// })
+// .delete( (req,res) =>{
+//   let db_connect = dbo.getDb();
+//   let myquery = { _id: ObjectId( req.params.id )};
+//   db_connect.collection("records").deleteOne(myquery, function (err, obj) {
+//     if (err) throw err;
+//     console.log("1 document deleted");
+//     response.json(obj);
+//   });
+// });
 
 
 

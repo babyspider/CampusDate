@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-let userSchema = new Schema({
+let matchSchema = new Schema({
     from_email: {
         type:   String
     },
@@ -13,4 +13,4 @@ let userSchema = new Schema({
 }, {
         collection: 'matches'
     })
-module.exports = mongoose.model('Matches', userSchema)
+module.exports = mongoose.model('Matches', matchSchema)

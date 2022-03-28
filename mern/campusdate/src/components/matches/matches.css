@@ -1,0 +1,25 @@
+body {
+  margin: 0;
+  background-color: pink;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.matches-item {
+	height: 30vh;
+}
+
+.matches-name{
+	font-size: 8vh;
+}
+
+.matches-email{
+	font-size: 6vh;
+}
+
+.matches-image {
+	height: 28vh;
+}

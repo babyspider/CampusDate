@@ -10,7 +10,8 @@ import Profile from "./components/profile/profile.component";
 import EditProfile from "./components/editprofile/editprofile.component";
 import CreateProfile from "./components/createprofile/createprofile.component";
 import Chat from "./components/chat/chat.component";
-
+import Matches from "./components/matches/matches.component";
+import GetMatches from "./components/routeTesting/get-match"
 
 ReactDOM.render(
   <React.StrictMode>
@@ -21,7 +22,9 @@ ReactDOM.render(
     <Route path="profile" element={<Profile />} />
     <Route path="editprofile" element={<EditProfile />} />
     <Route path="createprofile" element={<CreateProfile />} />
+    <Route path="matches" element={<Matches />} />
     <Route path="chat" element={<Chat />} />
+    <Route path="test1" element={<GetMatches />} /> 
   </Routes>
   </BrowserRouter>
   </React.StrictMode>,

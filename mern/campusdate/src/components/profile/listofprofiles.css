@@ -1,0 +1,62 @@
+
+body {
+    height:100vh;
+    width:100vh;
+    background-color: pink;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+.profileimages-image{
+    height: 50vh;
+    margin-left: auto;
+    margin-right: auto;
+    position: 'absolute';
+}
+
+  .customNav{
+      padding-top: 1vh;
+      height: 7vh;  
+      /* top: 20vh; */
+  }
+
+  .customNavSize{
+      position: absolute;
+  }
+
+  .customNavImage{
+      position: relative;
+      height: auto;
+      width: 7vh;
+  }
+
+  .hobbiesFormatting{
+    overflow: visible;
+    overflow-x: scroll;
+    overflow-y: hidden;
+  }
+
+  .matchedOnPadding{
+    padding-bottom: 1vh;
+  }
+
+  .btn-circle{
+      width: 7vh;
+      height: 7vh;
+      border-radius: 100px;
+      background-color: rgb(218, 69, 69);
+      margin-top: 2vh;
+      margin-bottom: 2vh;
+  }
+
+  .btn-circle2{
+    width: 7vh;
+    height: 7vh;
+    border-radius: 100px;
+    background-color: rgb(43, 172, 43);
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+  }

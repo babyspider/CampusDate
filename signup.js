@@ -10,6 +10,11 @@ import {
 } from 'react-native';
 import Constants from 'expo-constants';
 
+const formData = {
+  email: this.state.email,
+  password: this.state.password,
+}
+
 export default function App() {
   return (
     <View style={styles.background}>
@@ -19,11 +24,17 @@ export default function App() {
         style={styles.inputbox}
         placeholder="email"
         keyboardType = "email-address"
+        type="email"
+        id="email"
+        value={this.state.email}
       />
 
       <TextInput
         style={styles.inputbox}
         placeholder="password"
+        type="password"
+        id="password"
+        value={this.state.password}
       />
       
       <TextInput
@@ -33,7 +44,12 @@ export default function App() {
 
       <Pressable
         style={styles.buttons}
-        onPress={() => Alert.alert('Signing Up')}>
+        onPress={() => axios({
+          method: 'post',
+          url: 'apollo.arcator.co.uk/register',
+          data: formData,
+          config: {headers: {'Content-Type': 'multipart/form-data'}}
+        });}>
         <Text style={styles.buttonsText}>Sign Up</Text>
       </Pressable>
     </View>

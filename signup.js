@@ -46,10 +46,10 @@ export default function App() {
         style={styles.buttons}
         onPress={() => axios({
           method: 'post',
-          url: 'apollo.arcator.co.uk/register',
+          url: 'http://apollo.arcator.co.uk:5000/register',
           data: formData,
           config: {headers: {'Content-Type': 'multipart/form-data'}}
-        });}>
+        })}>
         <Text style={styles.buttonsText}>Sign Up</Text>
       </Pressable>
     </View>

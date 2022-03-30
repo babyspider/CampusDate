@@ -11,7 +11,7 @@ import {
 import { Link } from "react-router-dom";
 import Constants from 'expo-constants';
 
-import "axios";
+const axios = require('axios').default;
 
 const formData = {
   email: this.state.email,
@@ -42,12 +42,7 @@ export default function Signup() {
       <Link to="/createprofile">
       <Pressable
         style={styles.buttons}
-        onPress={() => axios({
-          method: 'post',
-          url: 'http://apollo.arcator.co.uk:5000/register',
-          data: formData,
-          config: {headers: {'Content-Type': 'multipart/form-data'}}
-        })}>
+        onPress={() => axios.post('/register')}>
         <Text style={styles.buttonsText}>Sign Up</Text>
       </Pressable>
       </Link>

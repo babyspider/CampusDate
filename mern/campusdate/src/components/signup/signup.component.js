@@ -10,15 +10,38 @@ import {
 } from 'react-native';
 import { Link } from "react-router-dom";
 import Constants from 'expo-constants';
+import { useState } from 'react';
 
 const axios = require('axios').default;
 
-const formData = {
-  email: this.state.email,
-  password: this.state.password,
-}
+
+
 
 export default function Signup() {
+
+
+  const [email, setEmail] = useState(1);
+  const [password, setPassword] = useState(2);
+
+  function handleEmail(event){
+    setEmail(event.target.value);
+  }
+
+  function submit(){
+    var formData = new FormData();
+    formData.append('email',email);
+    axios({
+      method: "post",
+      url: "https://apollo.arcator.co.uk@campusdate:5000/register",
+      data: formData,
+      headers: { "Content-Type": "multipart/form-data" },
+    }).then(function(response){
+      console.log(response);
+    }).catch(function(response){
+      console.log(response);
+    });
+  }
+
   return (
     <View style={styles.background}>
       <Text style={styles.title}>CampusDate</Text>
@@ -27,11 +50,14 @@ export default function Signup() {
         style={styles.inputbox}
         placeholder="email"
         keyboardType = "email-address"
+        //value={this.state.email}
+        onChange={handleEmail}//e=>setEmail(e.target.value)}
       />
 
       <TextInput
         style={styles.inputbox}
         placeholder="password"
+        //value={this.formData.password}
       />
 
       <TextInput
@@ -42,7 +68,7 @@ export default function Signup() {
       <Link to="/createprofile">
       <Pressable
         style={styles.buttons}
-        onPress={() => axios.post('/register')}>
+        onPress={submit}>
         <Text style={styles.buttonsText}>Sign Up</Text>
       </Pressable>
       </Link>

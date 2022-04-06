@@ -7,8 +7,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Link } from "react-router-dom";
 
-import login.component from './login/login.component';
-
+// import Login from './login/login.component";
 import useToken from './useToken';
 
 // import * as React from 'react';
@@ -59,11 +58,11 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 });
-    const {token,setToken} = useToken();
+    // const {token,setToken} = useToken();
 
-    if(!token) {
-      return <login.component setToken={setToken} />
-    }
+    // if(!token) {
+      //return <Login setToken={setToken} />
+    // }
 
     return (
     <View style={styles.background}>

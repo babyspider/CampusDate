@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {useState} from 'react';
 import {
   Text,
   View,
@@ -23,7 +23,7 @@ async function loginUser(credentials){
     .then(data=>data.json())
 }
 
-export default function App() {
+export default function Login({setToken}) {
   const [username, setUserName] = useState();
   const [password, setPassword] = useState();
 

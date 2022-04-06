@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
       <Text style={styles.title}>CampusDate</Text>
       
       <Link to="/signup">
-      <Pressable style={styles.buttons} onPress={() => Alert.alert('Signing Up')}>
+      <Pressable style={styles.buttons}>
       <Text style={styles.buttonsText}>Sign Up</Text>
       </Pressable>
       </Link>

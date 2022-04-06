@@ -4,6 +4,7 @@ let cors = require('cors');
 let bodyParser = require('body-parser');
 const matchRoute = require('../server/routes/match.routes')
 const userRoute = require('../server/routes/user.routes')
+const mail      = require('./resources/sendMail.js');
 mongoose
   .connect('mongodb+srv://campusdate:rpisdd2022rpisdd2022@campusdate.z8qxu.mongodb.net/campusdate?retryWrites=true&w=majority')
   .then((x) => {
@@ -18,8 +19,18 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use(cors());
+
 app.use('/matches', matchRoute)
 app.use('/users', userRoute)
+app.post('/register', function(req,res) {
+    var recipient = req.body.recipient.toString();
+    mail.execute(recipient,"test","test");
+});
+app.use('/login', (req,res) => {
+    res.send({
+        token: 'test123'
+    });
+});
 const port = process.env.PORT || 5000;
 const server = app.listen(port, () => {
     console.log('Connected to port ' + port)

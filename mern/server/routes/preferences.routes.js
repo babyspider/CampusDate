@@ -2,7 +2,7 @@ let mongoose = require('mongoose'),
     express = require('express'),
     router = express.Router();
 
-let users = require('../models/user-schema');
+let users = require('../models/preferences-schema');
 router.route('/create').post((req, res, next) => {
     users.create(req.body, (error, data) => {
         if (error) {
@@ -24,8 +24,8 @@ router.route('/').get((req, res) => {
     })
 })
 
-router.route('/get/:email').get((req, res) => {
-    users.findOne({email: req.params.email}, (error, data) => {
+router.route('/find/:email').get((req, res) => {
+    users.find({email: req.params.email}, (error, data) => {
         if (error) {
             return next(error)
         } else {
@@ -33,6 +33,17 @@ router.route('/get/:email').get((req, res) => {
         }
     })
 })
+
+router.route('/findfor/:email').get((req, res) => {
+    users.find({email: req.params.email}, (error, data) => {
+        if (error) {
+            return next(error)
+        } else {
+            res.json(data)
+        }
+    })
+})
+
 
 router.route('/edit/:id').get((req, res) => {
     users.findById(req.params.id, (error, data) => {

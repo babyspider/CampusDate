@@ -7,12 +7,23 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Link } from "react-router-dom";
 
+// import Login from './login/login.component";
+import useToken from './useToken';
+
 // import * as React from 'react';
 import { Text, View, StyleSheet, Pressable, Button, Alert} from 'react-native';
 import Constants from 'expo-constants';
 
 // import { NavigationContainer } from 'react-navigation/native';
 // import { createNativeStackNavigator } from '@react-navigation/native-stack';
+function setToken(userToken) {
+  sessionStorage.setItem('token', JSON.stringify(userToken));
+}
+function getToken() {
+  const tokenString = sessionStorage.getItem('token');
+  const userToken = JSON.parse(tokenString);
+  return userToken?.token
+}
 
 class App extends Component {
   render() {
@@ -47,6 +58,11 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 });
+    // const {token,setToken} = useToken();
+
+    // if(!token) {
+      //return <Login setToken={setToken} />
+    // }
 
     return (
     <View style={styles.background}>

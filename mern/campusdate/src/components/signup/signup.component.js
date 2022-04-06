@@ -21,7 +21,7 @@ export default function Signup() {
 
 
   const [email, setEmail] = useState(1);
-  const [password, setPassword] = useState(2);
+  const [password, setPassword] = useState(1);
 
   function handleEmail(event){
     setEmail(event.target.value);
@@ -31,8 +31,8 @@ export default function Signup() {
     var formData = new FormData();
     formData.append('email',email);
     axios({
-      method: "post",
-      url: "https://apollo.arcator.co.uk@campusdate:5000/register",
+      method: "POST",
+      url: "https://localhost:5000/register",
       data: formData,
       headers: { "Content-Type": "multipart/form-data" },
     }).then(function(response){

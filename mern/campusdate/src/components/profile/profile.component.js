@@ -7,7 +7,6 @@ import { StyleSheet, Text,  View, Alert, SafeAreaView, TouchableOpacity, Image, 
 import { Accordion, Button, ButtonGroup, Container, Figure, Form, ToggleButton, ToggleButtonGroup } from "react-bootstrap";
 import placeholder from "../assets/placeholder.png"
 import axios from 'axios';
-// TODO: setName function around line 57 won't work
 
 import { Link } from "react-router-dom";
 
@@ -112,7 +111,7 @@ export default class ListProfiles extends Component {
                         justifyContent: 'space-between',
                         flexDirection: 'column',
                       }}>
-            <Figure.Image className="profileimages-image" style = {{justifyContent: 'flex-start'}} src={require('../assets/anonprofile.png')}/>
+            <Figure.Image className="mx-auto d-block profileimages-image img-fluid" style = {{justifyContent: 'flex-center'}} src={require('../assets/anonprofile.png')}/>
             
             {/* might want to put name here of person lol */}
             {/* {this.matchesList()} */}
@@ -134,18 +133,13 @@ export default class ListProfiles extends Component {
   </Text>
   </Container>
 
-          <div class = "btn-group d-flex" role = "group" aria-label='buttons for matching'>
+          <div class = "btn-group d-flex matchButtonPadding" role = "group" aria-label='buttons for matching'>
             <button type = "button" className = "btn btn-circle"><Figure.Image className = "customNavImage" src={require('../assets/xIcon.png')}></Figure.Image></button>
             <button type = "button" className = "btn btn-circle2"><Figure.Image className = "customNavImage" src={require('../assets/heartIcon.png')}></Figure.Image></button>
           </div>
           
 
-          {/* navigational buttons at bottom of the page w/ links, class has info of aesthetics of buttons */}
-          <div class="btn-group d-flex customNav" role="group" aria-label="navigational buttons">
-              <a href = "/editprofile" button type="button" class="btn btn-secondary w-100 h-100 customNavSize"><Figure.Image className = "customNavImage" src={require('../assets/settingIcon.png')}></Figure.Image></a>
-              <a href = "/profile" button type="button" class="btn btn-secondary w-100 h-100 customNavSize"><Figure.Image className = "customNavImage" src={require('../assets/profileIcon.png')}></Figure.Image></a>
-              <a href = "/matches" button type="button" class="btn btn-secondary w-100 h-100 customNavSize"><Figure.Image className = "customNavImage" src={require('../assets/chatIcon.png')}></Figure.Image></a>
-          </div>
+         
 
           </ScrollView>
 
@@ -153,6 +147,13 @@ export default class ListProfiles extends Component {
         </Container>
 
       </body>
+
+       {/* navigational buttons at bottom of the page w/ links, class has info of aesthetics of buttons */}
+       <div class="btn-group d-flex customNavBar" role="group" aria-label="navigational buttons">
+            <a href = "/editprofile" button type="button" class="btn btn-secondary w-100 h-100 customNavSize"><Figure.Image className = "customNavImage" src={require('../assets/settingIcon.png')}></Figure.Image></a>
+            <a href = "/profile" button type="button" class="btn btn-secondary w-100 h-100 customNavSize"><Figure.Image className = "customNavImage" src={require('../assets/profileIcon.png')}></Figure.Image></a>
+            <a href = "/matches" button type="button" class="btn btn-secondary w-100 h-100 customNavSize"><Figure.Image className = "customNavImage" src={require('../assets/chatIcon.png')}></Figure.Image></a>
+        </div>
 
        
     </main>

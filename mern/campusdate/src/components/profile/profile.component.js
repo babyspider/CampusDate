@@ -7,7 +7,6 @@ import { StyleSheet, Text,  View, Alert, SafeAreaView, TouchableOpacity, Image, 
 import { Accordion, Button, ButtonGroup, Container, Figure, Form, ToggleButton, ToggleButtonGroup } from "react-bootstrap";
 import placeholder from "../assets/placeholder.png"
 import axios from 'axios';
-// TODO: setName function around line 57 won't work
 
 import { Link } from "react-router-dom";
 
@@ -120,7 +119,7 @@ export default class ListProfiles extends Component {
   render() {
 
 
-  const hobbies = [ {name:'hobby1', value:1}, {name:'hobby2', value:2}, {name:'hobby3', value:3},{name:'hobby4', value:4}, {name:'hobby5', value:5},{name:'hobby6', value:6},{name:'hobby7', value:7},{name:'hobby8', value:8},{name:'hobby9', value:9}]
+  // const hobbies = [ {name:'hobby1', value:1}, {name:'hobby2', value:2}, {name:'hobby3', value:3},{name:'hobby4', value:4}, {name:'hobby5', value:5},{name:'hobby6', value:6},{name:'hobby7', value:7},{name:'hobby8', value:8},{name:'hobby9', value:9}]
 
   return(
 
@@ -128,52 +127,54 @@ export default class ListProfiles extends Component {
       <head>
      </head>
       <body>
-        <Container>
-          <ScrollView contentContainerStyle={{
-                        flexGrow: 1,
-                        justifyContent: 'space-between',
-                        flexDirection: 'column',
-                      }}>
-            <Figure.Image className="profileimages-image" style = {{justifyContent: 'flex-start'}} src={require('../assets/anonprofile.png')}/>
-            
-            {/* might want to put name here of person lol */}
+        {/* <Container> */}
+        
             {/* {this.matchesList()} */}
-            {/* buttons for matching >> left = dont want to match, right = want to match */}
 
-  <Container>
-  <Text className = "profileText">
-    {this.state.userInfo.name}
-  </Text>
-    <Form>
-      <Form.Group className = "hobbiesFormatting">
-      <div class = "row matchedOnPadding">
-      {this.hobbies()}
-      </div>
-      </Form.Group>
-    </Form>
-  <Text className = "profileText">
-    {this.state.userInfo.desc}
-  </Text>
-  </Container>
+
+          <Container> 
+
+          {/* need access to src for profile pic >> does userInfo store that? */}
+          <Figure.Image className="mx-auto d-block profileimages-image img-fluid" style = {{justifyContent: 'flex-center'}} src={require('../assets/anonprofile.png')}/>
+          
+          {/* trying to center using Text didnt work >> switched to p for now */}
+          <p class = "text-center" style = {{fontSize: 30}}>
+            {this.state.userInfo.name}
+          </p>
+            <Form>
+              <Form.Group className = "hobbiesFormatting">
+              <div class = "row matchedOnPadding">
+              {this.hobbies()}
+              </div>
+              </Form.Group>
+            </Form>
+          <Container>
+            <ScrollView>
+              <Text style = {{fontSize: 18}}>
+                {this.state.userInfo.desc}
+              </Text>
+            </ScrollView>
+          </Container>
+
+          {/* buttons for matching >> left = dont want to match, right = want to match */}
           <div class = "btn-group d-flex" role = "group" aria-label='buttons for matching'>
-            <button type = "button" onClick={() => this.postmatch(true)} className = "btn btn-circle"><Figure.Image className = "customNavImage" src={require('../assets/xIcon.png')}></Figure.Image></button>
-            <button type = "button" onClick={() => this.postmatch(false)} className = "btn btn-circle2"><Figure.Image className = "customNavImage" src={require('../assets/heartIcon.png')}></Figure.Image></button>
-          </div>
-          
+            <button type = "button" onClick={() => this.postmatch(false)} className = "btn btn-circle"><Figure.Image className = "customNavImage" src={require('../assets/xIcon.png')}></Figure.Image></button>
+            <button type = "button" onClick={() => this.postmatch(true)} className = "btn btn-circle2"><Figure.Image className = "customNavImage" src={require('../assets/heartIcon.png')}></Figure.Image></button>
 
-          {/* navigational buttons at bottom of the page w/ links, class has info of aesthetics of buttons */}
-          <div class="btn-group d-flex customNav" role="group" aria-label="navigational buttons">
-              <a href = "/editprofile" button type="button" class="btn btn-secondary w-100 h-100 customNavSize"><Figure.Image className = "customNavImage" src={require('../assets/settingIcon.png')}></Figure.Image></a>
-              <a href = "/profile" button type="button" class="btn btn-secondary w-100 h-100 customNavSize"><Figure.Image className = "customNavImage" src={require('../assets/profileIcon.png')}></Figure.Image></a>
-              <a href = "/matches" button type="button" class="btn btn-secondary w-100 h-100 customNavSize"><Figure.Image className = "customNavImage" src={require('../assets/chatIcon.png')}></Figure.Image></a>
           </div>
 
-          </ScrollView>
-
+          </Container>
           
-        </Container>
+        {/* </Container> */}
 
       </body>
+
+       {/* navigational buttons at bottom of the page w/ links, class has info of aesthetics of buttons */}
+       <div class="btn-group d-flex customNavBar" role="group" aria-label="navigational buttons">
+            <a href = "/editprofile" button type="button" class="btn btn-secondary w-100 h-100 customNavSize"><Figure.Image className = "customNavImage" src={require('../assets/settingIcon.png')}></Figure.Image></a>
+            <a href = "/profile" button type="button" class="btn btn-secondary w-100 h-100 customNavSize"><Figure.Image className = "customNavImage" src={require('../assets/profileIcon.png')}></Figure.Image></a>
+            <a href = "/matches" button type="button" class="btn btn-secondary w-100 h-100 customNavSize"><Figure.Image className = "customNavImage" src={require('../assets/chatIcon.png')}></Figure.Image></a>
+        </div>
 
        
     </main>

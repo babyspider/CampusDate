@@ -37,7 +37,7 @@ export default class Matches extends Component {
   componentDidMount() {
     const getMatches = axios.get('http://localhost:5000/matches')
     const getUsers = axios.get('http://localhost:5000/users')
-    const loginEmail = "jkl@email.com"
+    const loginEmail = "abc@email.com"
           axios.all([getMatches, getUsers]).then(axios.spread((...responses) => {
             const allMatches = responses[0].data;
             const allUsers = responses[1].data;
@@ -63,7 +63,7 @@ export default class Matches extends Component {
               for(let j in allUsers){
                 if(matchEmails[i] == allUsers[j]["email"]){
                   const image = placeholder
-                  matchInfo.push({"name" : allUsers[j]["name"], "email": allUsers[j]["email"], "image": image});
+                  matchInfo.push({"name" : allUsers[j]["name"], "email": allUsers[j]["email"], "image": allUsers[j]["pictures"]});
                   break;
                 }
               }

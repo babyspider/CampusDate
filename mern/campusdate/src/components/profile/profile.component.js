@@ -80,7 +80,7 @@ export default class ListProfiles extends Component {
             return axios.get(getUser);
           })).then( response => {
             this.setState({ userInfo: response.data[0] });
-            console.log(this.state);
+            console.log(this.state.userInfo.pictures[0]);
             return this.state
           }).catch(function (error) {
               console.log(error);
@@ -132,29 +132,29 @@ export default class ListProfiles extends Component {
             {/* {this.matchesList()} */}
 
 
-          <Container> 
+      <Container> 
 
-          {/* need access to src for profile pic >> does userInfo store that? */}
-          <Figure.Image className="mx-auto d-block profileimages-image img-fluid" style = {{justifyContent: 'flex-center'}} src={require('../assets/anonprofile.png')}/>
-          
-          {/* trying to center using Text didnt work >> switched to p for now */}
-          <p class = "text-center" style = {{fontSize: 30}}>
-            {this.state.userInfo.name}
-          </p>
-            <Form>
-              <Form.Group className = "hobbiesFormatting">
-              <div class = "row matchedOnPadding">
-              {this.hobbies()}
-              </div>
-              </Form.Group>
-            </Form>
-          <Container>
-            <ScrollView>
-              <Text style = {{fontSize: 18}}>
-                {this.state.userInfo.desc}
-              </Text>
-            </ScrollView>
-          </Container>
+      {/* need access to src for profile pic >> does userInfo store that? */}
+      <Figure.Image className="mx-auto d-block profileimages-image img-fluid" style = {{justifyContent: 'flex-center'}} src={`${this.state.userInfo.pictures}`}/>
+      
+      {/* trying to center using Text didnt work >> switched to p for now */}
+      <p class = "text-center" style = {{fontSize: 30}}>
+        {this.state.userInfo.name}
+      </p>
+        <Form>
+          <Form.Group className = "hobbiesFormatting">
+          <div class = "row matchedOnPadding">
+          {this.hobbies()}
+          </div>
+          </Form.Group>
+        </Form>
+      <Container>
+        <ScrollView>
+          <Text style = {{fontSize: 18}}>
+            {this.state.userInfo.desc}
+          </Text>
+        </ScrollView>
+      </Container>
 
           {/* buttons for matching >> left = dont want to match, right = want to match */}
           <div class = "btn-group d-flex" role = "group" aria-label='buttons for matching'>

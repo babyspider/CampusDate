@@ -20,7 +20,7 @@ export default class ListProfiles extends Component {
   constructor(props) {
       super(props);
       
-      this.state = { loginEmail: "jkl@email.com", userEmail: "", userInfo: {}, userHobbies: {} };
+      this.state = { loginEmail: "def@email.com", userEmail: "", userInfo: {}, userHobbies: {} };
   }
   componentDidMount() {    
     const loginEmail = this.state.loginEmail
@@ -32,12 +32,16 @@ export default class ListProfiles extends Component {
             const allMatches = responses[0].data;
             const allPreferences = responses[1].data;
             const myPreferences = responses[2].data[0];
-            // get all emails of previously viewed users
+            // get all emails of previously viewed users/users that have already rejected current user
             var pastUsers = [];
             for(let i in allMatches){
               if(allMatches[i]["from_email"] == loginEmail){
                 const pastUser = allMatches[i]["to_email"];
                 pastUsers.push(pastUser);
+              }
+              if(allMatches[i]["to_email"] == loginEmail && !allMatches[i]["ismatch"]){
+                const pastUser = allMatches[i]["from_email"];
+                pastUsers.push(pastUser);                
               }
             }
             // console.log(pastUsers)

@@ -42,18 +42,19 @@ export default class ListProfiles extends Component {
             }
             // console.log(pastUsers)
             // get list, total number of possible hobbies
-            var numMatches = {};
+            var hobbiesMatch = {};
             var listPreferences = Object.keys(allPreferences[0]);
             listPreferences.shift();
             listPreferences.shift();
             // create dict for matching hobbies
             var numPreferences = listPreferences.length;
             while(numPreferences > -1){
-              numMatches[numPreferences] = [];
+              hobbiesMatch[numPreferences] = [];
               numPreferences--;
             }
-            // get preference info from unviewed users; set in numMatches and userHobbies     
-            var userHobbies = []      
+            // get preference info from unviewed users; set in hobbiesMatch and userHobbies     
+            var userHobbies = []
+            var numMatches = 0;
             for(let i in allPreferences){
               if(!pastUsers.includes(allPreferences[i]["email"]) && allPreferences[i]["email"] != loginEmail){
                 var numCommon = 0;
@@ -66,21 +67,36 @@ export default class ListProfiles extends Component {
                     numCommon++;
                   }                  
                 }
-                numMatches[numCommon].push(allPreferences[i]["email"]);
+                numMatches++;
+                hobbiesMatch[numCommon].push(allPreferences[i]["email"]);
               }
             }
+            if(numMatches != 0){
             // get hobby and profile info on top user
             numPreferences = listPreferences.length;
-            while(numPreferences > -1 && numMatches[numPreferences].length == 0){
+            while(numPreferences > -1 && hobbiesMatch[numPreferences].length == 0){
               numPreferences--;
             }
-            this.setState({ userEmail: numMatches[numPreferences][0] });
-            this.setState({ userHobbies: userHobbies[numMatches[numPreferences][0]]});
-            var getUser = "http://localhost:5000/users/get/" + numMatches[numPreferences][0];
+              this.setState({ userEmail: hobbiesMatch[numPreferences][0] });
+              this.setState({ userHobbies: userHobbies[hobbiesMatch[numPreferences][0]]});
+            var getUser = "http://localhost:5000/users/get/" + hobbiesMatch[numPreferences][0];
             return axios.get(getUser);
+            }else{
+              this.setState({ userEmail: this.state.loginEmail });
+              this.setState({ userHobbies: [] });   
+              var getUser = "http://localhost:5000/users/get/" + this.state.userEmail;
+              return axios.get(getUser);        
+            }
           })).then( response => {
-            this.setState({ userInfo: response.data[0] });
-            console.log(this.state.userInfo.pictures[0]);
+            if(response.data[0]["email"] == this.state.loginEmail){
+              var noUserInfo = response.data[0];
+              noUserInfo["name"] = "No potential matches remaining";
+              noUserInfo["pictures"] = [require('../assets/anonprofile.png')];
+              noUserInfo["desc"] = "Why not recommend our app? :)";
+              this.setState({ userInfo: noUserInfo});
+            }else{
+              this.setState({ userInfo: response.data[0]});            
+            }
             return this.state
           }).catch(function (error) {
               console.log(error);

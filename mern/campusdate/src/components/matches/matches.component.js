@@ -29,6 +29,12 @@ const MatchesList = props => (
   </ListGroup.Item>
 )
 
+const EmptyMatchesList = props => (
+  <ListGroup.Item className="matches-item" variant="outline-primary"><h2 class="m-3">No matches (yet!)</h2></ListGroup.Item>
+
+
+)
+
 export default class Matches extends Component {
   constructor(props) {
       super(props);
@@ -37,7 +43,7 @@ export default class Matches extends Component {
   componentDidMount() {
     const getMatches = axios.get('http://localhost:5000/matches')
     const getUsers = axios.get('http://localhost:5000/users')
-    const loginEmail = "abc@email.com"
+    const loginEmail = "jkl@email.com"
           axios.all([getMatches, getUsers]).then(axios.spread((...responses) => {
             const allMatches = responses[0].data;
             const allUsers = responses[1].data;
@@ -76,15 +82,17 @@ export default class Matches extends Component {
           })
   }
   matchesList(){
-      return this.state.usersCollection.map((data, i) => {
-          return <MatchesList obj={data} key={i} />;
-      });    
+    // console.log(this.state.usersCollection.length);
+      if(this.state.usersCollection.length != 0){
+        return this.state.usersCollection.map((data, i) => {
+            return <MatchesList obj={data} key={i} />;
+        });
+      }else{
+        console.log(this.state.usersCollection.length);
+        return <EmptyMatchesList />
+      }   
   }
-  dataTable() {
-      return this.state.usersCollection.map((data, i) => {
-          return <DataTable obj={data} key={i} />;
-      });
-  }
+
   render() {
   // const [checked, setChecked] = useState(false);
   // const [radioValue, setRadioValue] = useState('1');

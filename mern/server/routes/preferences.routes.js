@@ -2,9 +2,9 @@ let mongoose = require('mongoose'),
     express = require('express'),
     router = express.Router();
 
-let users = require('../models/preferences-schema');
+let preferences = require('../models/preferences-schema');
 router.route('/create').post((req, res, next) => {
-    users.create(req.body, (error, data) => {
+    preferences.create(req.body, (error, data) => {
         if (error) {
             return next(error)
         } else {
@@ -15,7 +15,7 @@ router.route('/create').post((req, res, next) => {
 });
 
 router.route('/').get((req, res) => {
-    users.find((error, data) => {
+    preferences.find((error, data) => {
         if (error) {
             return next(error)
         } else {
@@ -25,7 +25,7 @@ router.route('/').get((req, res) => {
 })
 
 router.route('/find/:email').get((req, res) => {
-    users.find({email: req.params.email}, (error, data) => {
+    preferences.find({email: req.params.email}, (error, data) => {
         if (error) {
             return next(error)
         } else {
@@ -34,19 +34,29 @@ router.route('/find/:email').get((req, res) => {
     })
 })
 
-router.route('/findfor/:email').get((req, res) => {
-    users.find({email: req.params.email}, (error, data) => {
+// router.route('/findfor/:email').get((req, res) => {
+//     preferences.find({email: req.params.email}, (error, data) => {
+//         if (error) {
+//             return next(error)
+//         } else {
+//             res.json(data)
+//         }
+//     })
+// })
+
+router.route('/create').post((req, res, next) => {
+    preferences.create(req.body, (error, data) => {
         if (error) {
             return next(error)
         } else {
+            console.log(data)
             res.json(data)
         }
     })
-})
-
+});
 
 router.route('/edit/:id').get((req, res) => {
-    users.findById(req.params.id, (error, data) => {
+    preferences.findById(req.params.id, (error, data) => {
         if (error) {
             return next(error)
         } else {
@@ -56,7 +66,7 @@ router.route('/edit/:id').get((req, res) => {
 })
 
 router.route('/update/:id').put((req, res, next) => {
-    users.findByIdAndUpdate(req.params.id, {
+    preferences.findByIdAndUpdate(req.params.id, {
         $set: req.body
     }, (error, data) => {
         if (error) {
@@ -64,12 +74,12 @@ router.route('/update/:id').put((req, res, next) => {
             console.log(error)
         } else {
             res.json(data)
-            console.log('users updated successfully !')
+            console.log('preferences updated successfully !')
         }
     })
 })
 router.route('/delete/:id').delete((req, res, next) => {
-    users.findByIdAndRemove(req.params.id, (error, data) => {
+    preferences.findByIdAndRemove(req.params.id, (error, data) => {
         if (error) {
             return next(error);
         } else {

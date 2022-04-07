@@ -20,10 +20,11 @@ const DataTable = props => (
 export default class ListProfiles extends Component {
   constructor(props) {
       super(props);
-      this.state = { userEmail: "", userInfo: {}, userHobbies: {} };
+      
+      this.state = { loginEmail: "jkl@email.com", userEmail: "", userInfo: {}, userHobbies: {} };
   }
-  componentDidMount() {
-    const loginEmail = "jkl@email.com"
+  componentDidMount() {    
+    const loginEmail = this.state.loginEmail
     const getMatches = axios.get('http://localhost:5000/matches')    
     const getPreferences = axios.get('http://localhost:5000/preferences')
     const userPreferences = axios.get('http://localhost:5000/preferences/find/' + loginEmail);
@@ -69,7 +70,6 @@ export default class ListProfiles extends Component {
                 numMatches[numCommon].push(allPreferences[i]["email"]);
               }
             }
-            // console.log(numMatches);
             // get hobby and profile info on top user
             numPreferences = listPreferences.length;
             while(numPreferences > -1 && numMatches[numPreferences].length == 0){
@@ -80,16 +80,38 @@ export default class ListProfiles extends Component {
             var getUser = "http://localhost:5000/users/get/" + numMatches[numPreferences][0];
             return axios.get(getUser);
           })).then( response => {
-            this.setState({ userInfo: response.data });
+            this.setState({ userInfo: response.data[0] });
+            console.log(this.state);
             return this.state
           }).catch(function (error) {
               console.log(error);
           })
-  }
+ }
   
+  postmatch(isMatch) {
+    if(isMatch){
+      var postStr = 'http://localhost:5000/matches/create/' + this.state.loginEmail +
+      '/' + this.state.userEmail + '/true'
+      axios.post(postStr).then((response) => {
+        console.log(response);
+      }, (error) => {
+        console.log(error);
+      });       
+    }else{
+      var postStr = 'http://localhost:5000/matches/create/' + this.state.loginEmail +
+      '/' + this.state.userEmail + '/false'
+      axios.post(postStr).then((response) => {
+        console.log(response);
+      }, (error) => {
+        console.log(error);
+      }); 
+    }
+    window.location.reload(false);
+  
+  }
+
   hobbies() {
     var hobbys = Array.from(this.state.userHobbies);
-    console.log(hobbys);
       return hobbys.map((data, i) => {
           return <DataTable obj={data} key={i} />;
       });
@@ -133,10 +155,9 @@ export default class ListProfiles extends Component {
     {this.state.userInfo.desc}
   </Text>
   </Container>
-
           <div class = "btn-group d-flex" role = "group" aria-label='buttons for matching'>
-            <button type = "button" className = "btn btn-circle"><Figure.Image className = "customNavImage" src={require('../assets/xIcon.png')}></Figure.Image></button>
-            <button type = "button" className = "btn btn-circle2"><Figure.Image className = "customNavImage" src={require('../assets/heartIcon.png')}></Figure.Image></button>
+            <button type = "button" onClick={() => this.postmatch(true)} className = "btn btn-circle"><Figure.Image className = "customNavImage" src={require('../assets/xIcon.png')}></Figure.Image></button>
+            <button type = "button" onClick={() => this.postmatch(false)} className = "btn btn-circle2"><Figure.Image className = "customNavImage" src={require('../assets/heartIcon.png')}></Figure.Image></button>
           </div>
           
 

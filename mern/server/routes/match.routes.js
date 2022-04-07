@@ -3,15 +3,14 @@ let mongoose = require('mongoose'),
     router = express.Router();
 
 let match = require('../models/match-schema');
-router.route('/create').post((req, res, next) => {
-    match.create(req.body, (error, data) => {
-        if (error) {
-            return next(error)
-        } else {
-            console.log(data)
-            res.json(data)
-        }
-    })
+
+router.post('/create/:femail/:temail/:isMatch', (req, res) => {
+    const newMatch = new match({from_email: req.params.femail,
+                                to_email: req.params.temail,
+                                is_match: req.params.isMatch})
+    newMatch
+    .save()
+    .then(() => res.json("New match created!"))    
 });
 
 router.route('/').get((req, res) => {

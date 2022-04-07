@@ -25,7 +25,7 @@ router.route('/').get((req, res) => {
 })
 
 router.route('/get/:email').get((req, res) => {
-    users.findOne({email: req.params.email}, (error, data) => {
+    users.find({email: req.params.email}, (error, data) => {
         if (error) {
             return next(error)
         } else {

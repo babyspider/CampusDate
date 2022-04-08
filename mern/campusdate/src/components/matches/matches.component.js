@@ -50,7 +50,7 @@ export default class Matches extends Component {
             // get all emails of valid matches
             var matchEmails = [];
             for(let i in allMatches){
-              if(allMatches[i]["from_email"] == loginEmail){
+              if(allMatches[i]["from_email"] == this.state.loginEmail){
                 const reciprocate = allMatches[i]["to_email"];
                 var isreciprocate = false;
                 for(let j in allMatches){

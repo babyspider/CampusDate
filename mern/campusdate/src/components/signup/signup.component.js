@@ -32,6 +32,9 @@ export default function Signup() {
     setPassword(event.target.value);
   }
 
+  /**
+   * Submit button for sign-up registers in user inputs to MongoDB 
+   */
   function submit(){
     var formData = new FormData();
     formData.append('email',email);
@@ -50,6 +53,11 @@ export default function Signup() {
   }
 
   return (
+    /**
+     * Front end visualizaiton for Signup
+     * Contains text input for email, password, and re-entere password
+     * Submit button goes to createprofile page
+     */
     <View style={styles.background}>
     <Text style={styles.title}>CampusDate</Text>
 

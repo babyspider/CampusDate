@@ -9,19 +9,19 @@ body {
 }
 
 .matches-item {
-	height: 30vh;
+  height: 30vh;
 }
 
 .matches-name{
-	font-size: 8vh;
+  font-size: 8vh;
 }
 
 .matches-email{
-	font-size: 6vh;
+  font-size: 6vh;
 }
 
 .matches-image {
-	height: 28vh;
+  height: 28vh;
 }
 
 .customNavBar{

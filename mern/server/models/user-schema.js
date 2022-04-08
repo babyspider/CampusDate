@@ -1,3 +1,8 @@
+/**
+*This document holds the schema for the 
+*users profile information
+*we use this in displaying users and logging in
+*/
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 let userSchema = new Schema({

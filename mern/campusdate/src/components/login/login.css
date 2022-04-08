@@ -1,4 +1,15 @@
-.inputbox: {
+body {
+  height:100vh;
+  width:100vh;
+  background-color: pink;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.inputbox{
   backgroundColor: 'white';
   borderRadius: 5;
   fontSize: 20;
@@ -8,7 +19,7 @@
   marginHorizontal: '20%';
   }
 
-.buttons: {
+.buttons{
   borderRadius: 20;
   borderColor: 'grey';
   marginTop: '5%';
@@ -17,21 +28,14 @@
   borderWidth: 2;
   }
 
-.buttonsText: {
+.buttonsText{
   margin: '1%';
   textAlign: 'center';
   color: 'grey';
   fontSize: 25;
   }
 
-.background: {
-  flex: 1;
-  justifyContent: 'center';
-  backgroundColor: 'pink';
-  padding: 8;
-  }
-
-.title: {
+.title{
   backgroundColor: 'none';
   margin: 1;
   fontSize: 50;

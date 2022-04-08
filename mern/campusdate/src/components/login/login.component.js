@@ -20,6 +20,7 @@ async function loginUser(username,password){
   if(data){
     localStorage.setItem("email",username);
     localStorage.setItem("password",password);
+    window.location.href = "http://localhost:3000/profile";
   }else{
     Alert.alert("Incorrect Email or Password");
   }
@@ -50,6 +51,7 @@ export default function Login({setToken}) {
     
     setToken(token);
     console.log(token);
+
     return token;
   }
 

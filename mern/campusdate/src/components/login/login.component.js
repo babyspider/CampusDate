@@ -17,6 +17,12 @@ import { useLocalStorage } from "../../useLocalStorage";
 async function loginUser(username,password){
   var data = axios.get("http://localhost:5000/users/login/"+username+":"+password);
   console.log(data);
+  if(data){
+    localStorage.setItem("email",username);
+    localStorage.setItem("password",password);
+  }else{
+    Alert.alert("Incorrect Email or Password");
+  }
   return data;
   /*return fetch('http://localhost:5000/login', {
     method: 'POST',
@@ -41,12 +47,7 @@ export default function Login({setToken}) {
     e.preventDefault();
     console.log(e.target);
     const token = await loginUser(username,password);
-    if(token){
-      localStorage.setItem("email",username);
-      localStorage.setItem("password",password);
-    }else{
-      Alert.alert("Incorrect Email or Password");
-    }
+    
     setToken(token);
     console.log(token);
     return token;

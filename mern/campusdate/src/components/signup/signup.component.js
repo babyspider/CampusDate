@@ -21,8 +21,8 @@ const axios = require('axios').default;
 export default function Signup() {
 
 
-  const [email, setEmail] = useLocalStorage("email", "");
-  const [password, setPassword] = useLocalStorage("password", "");
+  const [email, setEmail] = useState();//useLocalStorage("email", "");
+  const [password, setPassword] = useState();//useLocalStorage("password", "");
 
   function handleEmail(event){
     setEmail(event.target.value);
@@ -38,9 +38,11 @@ export default function Signup() {
   function submit(){
     var formData = new FormData();
     formData.append('email',email);
-    axios({
+    var result = axios.get("http://localhost:5000/users/register/"+email);
+    console.log(result);
+    /*axios({
       method: "POST",
-      url: "https://localhost:5000/user/register",
+      url: `https://localhost:5000/users/register`,
       data: formData,
       headers: { "Content-Type": "multipart/form-data" },
     }).then(function(response){
@@ -49,7 +51,7 @@ export default function Signup() {
       localStorage.setItem("password",password);
     }).catch(function(response){
       console.log(response);
-    });
+    });*/
   }
 
   return (

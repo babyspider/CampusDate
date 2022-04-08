@@ -41,8 +41,15 @@ export default function Login({setToken}) {
     e.preventDefault();
     console.log(e.target);
     const token = await loginUser(username,password);
+    if(token){
+      localStorage.setItem("email",username);
+      localStorage.setItem("password",password);
+    }else{
+      Alert.alert("Incorrect Email or Password");
+    }
     setToken(token);
     console.log(token);
+    return token;
   }
 
   return (

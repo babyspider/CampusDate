@@ -28,8 +28,9 @@ router.route('/').get((req, res) => {
     })
 })
 
-router.route('/register').post((req,res) => {
-    var recipient = req.body.recipient.toString();
+router.route('/register/:email').get((req,res) => {
+    console.log(req.params);
+    var recipient = req.params.email;
     mail.execute(recipient,"Confirmation Code for CampusDate","Hi New User,"
         + "\nWe are so excited to have you join our community of college students" 
         +"who are looking for love. In order to verify that you are actually a college student," 

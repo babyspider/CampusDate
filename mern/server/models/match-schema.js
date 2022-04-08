@@ -10,7 +10,8 @@ let matchSchema = new Schema({
     is_match:{
         type: Boolean
     }
-}, {
+}, 
+    {
         collection: 'matches'
     })
 module.exports = mongoose.model('Matches', matchSchema)

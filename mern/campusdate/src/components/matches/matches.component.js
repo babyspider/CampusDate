@@ -38,12 +38,12 @@ const EmptyMatchesList = props => (
 export default class Matches extends Component {
   constructor(props) {
       super(props);
-      this.state = { usersCollection: [] };
+      const loginEmail = "jkl@email.com"
+      this.state = {  loginEmail: loginEmail, usersCollection: [] };
   }
   componentDidMount() {
     const getMatches = axios.get('http://localhost:5000/matches')
-    const getUsers = axios.get('http://localhost:5000/users')
-    const loginEmail = "jkl@email.com"
+    const getUsers = axios.get('http://localhost:5000/users')    
           axios.all([getMatches, getUsers]).then(axios.spread((...responses) => {
             const allMatches = responses[0].data;
             const allUsers = responses[1].data;

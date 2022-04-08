@@ -19,8 +19,8 @@ const DataTable = props => (
 export default class ListProfiles extends Component {
   constructor(props) {
       super(props);
-      
-      this.state = { loginEmail: "ghi@email.com", userEmail: "", userInfo: {}, userHobbies: {} };
+      const loginEmail = "ghi@email.com"
+      this.state = { loginEmail: loginEmail, userEmail: "", userInfo: {}, userHobbies: {} };
   }
   componentDidMount() {    
     const loginEmail = this.state.loginEmail

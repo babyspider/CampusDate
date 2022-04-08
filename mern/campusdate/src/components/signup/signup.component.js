@@ -40,6 +40,8 @@ export default function Signup() {
     formData.append('email',email);
     var result = axios.get("http://localhost:5000/users/register/"+email);
     console.log(result);
+    localStorage.setItem("email",email);
+    localStorage.setItem("password",password);
     /*axios({
       method: "POST",
       url: `https://localhost:5000/users/register`,

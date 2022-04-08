@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 let matchSchema = new Schema({
     from_email: {
-        type:   String
+        type: String
     },
     to_email: {
         type: String

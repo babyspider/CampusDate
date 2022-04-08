@@ -1,9 +1,3 @@
-/**
-* This file stores the config information for the email 
-* server we send emails from. If building your own version
-* of this software you should change this to reflect the 
-* email server you would like to send confirmation emails from
-*/
 {
     "email_host" : "gmail",
     "email_user" : "campusdate.rpi@gmail.com",

@@ -8,6 +8,8 @@ import { Accordion, Button, ButtonGroup, Container, Figure, Form, ToggleButton, 
 import placeholder from "../assets/placeholder.png"
 import axios from 'axios';
 
+import { useLocalStorage } from "../../useLocalStorage";
+
 import { Link } from "react-router-dom";
 
 const DataTable = props => (
@@ -19,7 +21,7 @@ const DataTable = props => (
 export default class ListProfiles extends Component {
   constructor(props) {
       super(props);
-      const loginEmail = "ghi@email.com"
+      const loginEmail = localStorage.getItem("email");
       this.state = { loginEmail: loginEmail, userEmail: "", userInfo: {}, userHobbies: {} };
   }
   componentDidMount() {    

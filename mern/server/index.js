@@ -32,11 +32,7 @@ app.use(cors());
 app.use('/matches', matchRoute)
 app.use('/users', userRoute)
 app.use('/preferences', preferencesRoute)
-app.use('/login', (req,res) => {
-    res.send({
-        token: 'test123'
-    });
-});
+
 const port = process.env.PORT || 5000;
 const server = app.listen(port, () => {
     console.log('Connected to port ' + port)

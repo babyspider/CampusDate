@@ -11,29 +11,38 @@ import {
 import Constants from 'expo-constants';
 import { Link } from "react-router-dom";
 import PropTypes from 'prop-types';
+import axios from 'axios';
+import { useLocalStorage } from "../../useLocalStorage";
 
-async function loginUser(credentials){
-  return fetch('http://localhost:5000/login', {
+async function loginUser(username,password){
+  var data = axios.get("http://localhost:5000/users/login/"+username+":"+password);
+  console.log(data);
+  return data;
+  /*return fetch('http://localhost:5000/login', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(credentials)
   })
-    .then(data=>data.json())
-}
+    .then(data=>{
+      data.json();
+      console.log(data);
+    })*/
+
+};
 
 export default function Login({setToken}) {
   const [username, setUserName] = useState();
   const [password, setPassword] = useState();
 
   const handleSubmit = async e => {
+    
     e.preventDefault();
-    const token = await loginUser({
-      username,
-      password
-    });
+    console.log(e.target);
+    const token = await loginUser(username,password);
     setToken(token);
+    console.log(token);
   }
 
   return (
@@ -57,7 +66,7 @@ export default function Login({setToken}) {
 
       <Link to="/profile">
       <Pressable
-        style={styles.buttons}
+        style={styles.buttons}  
         onPress={handleSubmit} type = "submit">
         <Text style={styles.buttonsText}>Login</Text>
       </Pressable>

@@ -45,3 +45,15 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.customNavBar{
+  position: fixed;
+  bottom: 0px;
+  padding-top: 1vh;
+  height: 7vh;
+  width: 100vh;  
+}
+
+.submitButtonPadding{
+  padding-block-end: 7vh;
+}

@@ -154,17 +154,12 @@ export default class ListProfiles extends Component {
       <head>
      </head>
       <body>
-        {/* <Container> */}
-        
-            {/* {this.matchesList()} */}
-
-
+ 
       <Container> 
 
-      {/* need access to src for profile pic >> does userInfo store that? */}
       <Figure.Image className="mx-auto d-block profileimages-image img-fluid" style = {{justifyContent: 'flex-center'}} src={`${this.state.userInfo.pictures}`}/>
       
-      {/* trying to center using Text didnt work >> switched to p for now */}
+      {/* creating container for name, matched on hobbies, and user description */}
       <p class = "text-center" style = {{fontSize: 30}}>
         {this.state.userInfo.name}
       </p>
@@ -184,23 +179,22 @@ export default class ListProfiles extends Component {
       </Container>
 
           {/* buttons for matching >> left = dont want to match, right = want to match */}
-          <div class = "btn-group d-flex" role = "group" aria-label='buttons for matching'>
+          {/* matchButtonPadding for no overlap */}
+          <div class = "btn-group d-flex matchButtonPadding" role = "group" aria-label='buttons for matching'>
             <button type = "button" onClick={() => this.postmatch(false)} className = "btn btn-circle"><Figure.Image className = "customNavImage" src={require('../assets/xIcon.png')}></Figure.Image></button>
             <button type = "button" onClick={() => this.postmatch(true)} className = "btn btn-circle2"><Figure.Image className = "customNavImage" src={require('../assets/heartIcon.png')}></Figure.Image></button>
 
           </div>
 
           </Container>
-          
-        {/* </Container> */}
 
       </body>
 
        {/* navigational buttons at bottom of the page w/ links, class has info of aesthetics of buttons */}
        <div class="btn-group d-flex customNavBar" role="group" aria-label="navigational buttons">
-            <a href = "/editprofile" button type="button" class="btn btn-secondary w-100 h-100 customNavSize"><Figure.Image className = "customNavImage" src={require('../assets/settingIcon.png')}></Figure.Image></a>
-            <a href = "/profile" button type="button" class="btn btn-secondary w-100 h-100 customNavSize"><Figure.Image className = "customNavImage" src={require('../assets/profileIcon.png')}></Figure.Image></a>
-            <a href = "/matches" button type="button" class="btn btn-secondary w-100 h-100 customNavSize"><Figure.Image className = "customNavImage" src={require('../assets/chatIcon.png')}></Figure.Image></a>
+          <a href = "/editprofile" button type="button" class="btn btn-secondary w-100 h-100 customNavSize"><Figure.Image className = "customNavImage" src={require('../assets/settingIcon.png')}></Figure.Image></a>
+          <a href = "/profile" button type="button" class="btn btn-secondary w-100 h-100 customNavSize"><Figure.Image className = "customNavImage" src={require('../assets/profileIcon.png')}></Figure.Image></a>
+          <a href = "/matches" button type="button" class="btn btn-secondary w-100 h-100 customNavSize"><Figure.Image className = "customNavImage" src={require('../assets/chatIcon.png')}></Figure.Image></a>
         </div>
 
        

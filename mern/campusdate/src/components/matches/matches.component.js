@@ -106,13 +106,20 @@ export default class Matches extends Component {
      <body>
          <h1 class="m-3">Matches</h1>
          <Container>
-         <ListGroup class="m-4">
+         <ListGroup class="m-4 matchesPadding">
            {this.matchesList()}
          </ListGroup>
          </Container>
 
 
       </body>
+
+      <div class="btn-group d-flex customNavBar" role="group" aria-label="navigational buttons">
+          <a href = "/editprofile" button type="button" class="btn btn-secondary w-100 h-100 customNavSize"><Figure.Image className = "customNavImage" src={require('../assets/settingIcon.png')}></Figure.Image></a>
+          <a href = "/profile" button type="button" class="btn btn-secondary w-100 h-100 customNavSize"><Figure.Image className = "customNavImage" src={require('../assets/profileIcon.png')}></Figure.Image></a>
+          <a href = "/matches" button type="button" class="btn btn-secondary w-100 h-100 customNavSize"><Figure.Image className = "customNavImage" src={require('../assets/chatIcon.png')}></Figure.Image></a>
+      </div>
+
       </main>
     )
   }

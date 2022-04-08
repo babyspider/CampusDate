@@ -19,12 +19,18 @@ const DataTable = props => (
 )
 
 export default class ListProfiles extends Component {
+  /**
+   * Sets state for default user (user who is currently logged in)
+   */
   constructor(props) {
       super(props);
       const loginEmail = localStorage.getItem("email");
       this.state = { loginEmail: loginEmail, userEmail: "", userInfo: {}, userHobbies: {} };
   }
   componentDidMount() {    
+    /**
+     * Getting user information from various pages 
+     */
     const loginEmail = this.state.loginEmail
     const getMatches = axios.get('http://localhost:5000/matches')    
     const getPreferences = axios.get('http://localhost:5000/preferences')
@@ -34,7 +40,9 @@ export default class ListProfiles extends Component {
             const allMatches = responses[0].data;
             const allPreferences = responses[1].data;
             const myPreferences = responses[2].data[0];
-            // get all emails of previously viewed users/users that have already rejected current user
+            /** 
+             * Get all emails of previously viewed users/users that have already rejected current user 
+             */
             var pastUsers = [];
             var numMatches = responses[1].data.length;
             for(let i in allMatches){
@@ -55,7 +63,10 @@ export default class ListProfiles extends Component {
             console.log(numMatches);
             if(numMatches != 1){
               // console.log(pastUsers)
-              // get list, total number of possible hobbies
+
+              /**
+               *  Get a list for total number of possible hobbies
+               */ 
               var hobbiesMatch = {};
               var listPreferences = Object.keys(allPreferences[0]);
               listPreferences.shift();
@@ -66,7 +77,10 @@ export default class ListProfiles extends Component {
                 hobbiesMatch[numPreferences] = [];
                 numPreferences--;
               }
-              // get preference info from unviewed users; set in hobbiesMatch and userHobbies     
+              /**
+               * Get preference info from unviewed users; 
+               * Set in hobbiesMatch and userHobbies 
+               */    
               var userHobbies = []
               for(let i in allPreferences){
                 if(!pastUsers.includes(allPreferences[i]["email"]) && allPreferences[i]["email"] != loginEmail){
@@ -84,7 +98,9 @@ export default class ListProfiles extends Component {
                 }
               }
 
-              // get hobby and profile info on top user
+              /**
+               * Get hobby and profile info on top user 
+               */
               numPreferences = listPreferences.length;
               while(numPreferences > -1 && hobbiesMatch[numPreferences].length == 0){
                 numPreferences--;
@@ -116,6 +132,9 @@ export default class ListProfiles extends Component {
           })
  }
   
+  /**
+   * Checks and sets whether a user has hearted or "x-ed" another user 
+   */ 
   postmatch(isMatch) {
     if(isMatch){
       var postStr = 'http://localhost:5000/matches/create/' + this.state.loginEmail +
@@ -138,6 +157,9 @@ export default class ListProfiles extends Component {
   
   }
 
+  /**
+   *  Getting list of hobbies for user that was selected during create profile / edit profile 
+   */
   hobbies() {
     var hobbys = Array.from(this.state.userHobbies);
       return hobbys.map((data, i) => {
@@ -146,7 +168,6 @@ export default class ListProfiles extends Component {
   }
 
   render() {
-
 
   // const hobbies = [ {name:'hobby1', value:1}, {name:'hobby2', value:2}, {name:'hobby3', value:3},{name:'hobby4', value:4}, {name:'hobby5', value:5},{name:'hobby6', value:6},{name:'hobby7', value:7},{name:'hobby8', value:8},{name:'hobby9', value:9}]
 
@@ -161,7 +182,9 @@ export default class ListProfiles extends Component {
 
       <Figure.Image className="mx-auto d-block profileimages-image img-fluid" style = {{justifyContent: 'flex-center'}} src={`${this.state.userInfo.pictures}`}/>
       
-      {/* creating container for name, matched on hobbies, and user description */}
+      {/**
+       *  Creating container for name, matched on hobbies, and user description 
+       */}
       <p class = "text-center" style = {{fontSize: 30}}>
         {this.state.userInfo.name}
       </p>
@@ -180,8 +203,12 @@ export default class ListProfiles extends Component {
         </ScrollView>
       </Container>
 
-          {/* buttons for matching >> left = dont want to match, right = want to match */}
-          {/* matchButtonPadding for no overlap */}
+          {/**
+           * Button for matching preferences
+           * Left button ("x") means current user does not want to match
+           * Right button (heart) means current user wants to match
+          */}
+          
           <div class = "btn-group d-flex matchButtonPadding" role = "group" aria-label='buttons for matching'>
             <button type = "button" onClick={() => this.postmatch(false)} className = "btn btn-circle"><Figure.Image className = "customNavImage" src={require('../assets/xIcon.png')}></Figure.Image></button>
             <button type = "button" onClick={() => this.postmatch(true)} className = "btn btn-circle2"><Figure.Image className = "customNavImage" src={require('../assets/heartIcon.png')}></Figure.Image></button>
@@ -192,7 +219,10 @@ export default class ListProfiles extends Component {
 
       </body>
 
-       {/* navigational buttons at bottom of the page w/ links, class has info of aesthetics of buttons */}
+       {/**
+        *  Navigational buttons at bottom of the page w/ links, class has info of aesthetics of buttons
+        *  Links go to edit profile, profile, and matches page
+        */}
        <div class="btn-group d-flex customNavBar" role="group" aria-label="navigational buttons">
           <a href = "/editprofile" button type="button" class="btn btn-secondary w-100 h-100 customNavSize"><Figure.Image className = "customNavImage" src={require('../assets/settingIcon.png')}></Figure.Image></a>
           <a href = "/profile" button type="button" class="btn btn-secondary w-100 h-100 customNavSize"><Figure.Image className = "customNavImage" src={require('../assets/profileIcon.png')}></Figure.Image></a>

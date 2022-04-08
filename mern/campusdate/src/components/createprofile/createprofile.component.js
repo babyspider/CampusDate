@@ -4,40 +4,37 @@ import { Accordion, Button, ButtonGroup, Container, Figure, Form, ToggleButton, 
 import React, { Component, useEffect, useState } from "react";
 import placeholder from "../assets/placeholder.png";
 import axios from 'axios';
-import { useLocalStorage } from "../../useLocalStorage";
 const FormData = require('form-data')
 
 export default class CreateProfile extends Component{
   constructor(props) {
       super(props);
-      const signupEmail = localStorage.getItem("email");
-      const signupPwd = localStorage.getItem("password");
+      const signupEmail = "mno@email.com"
+      const signupPwd = "123456"
       this.state = { signupEmail: signupEmail, signupPwd: signupPwd, hobbies: [], getChecked: [], signupForm: {} };
   }
   componentDidMount() {
-    
-    
-    // this.setState({getChecked: [checked, setChecked]})
-    //arbitrary list of preferences
     const getHobbies = axios.get('http://localhost:5000/preferences/find/abc@email.com')
           axios.all([getHobbies]).then(axios.spread((...responses) => {
             const gotHobbies = responses[0].data[0];
-            // console.log(gotHobbies);
-            // get all emails of valid matches
+          
             var allHobbies = [];
             for(var i in gotHobbies){
               if(i != "email" && i != "_id"){
                 allHobbies.push(i);
               }
             }
-            // get contact info from emails
             this.setState({ hobbies: Array.from(allHobbies) })
-            // console.log(this.state)
+          
           }))
           .catch(function (error) {
               console.log(error);
           })
   }
+
+  /** 
+  * Stores user information for each user, allows for user information retrieval 
+  */
   postuser() {
     var userData = {};
     userData['email'] = this.state.signupEmail;
@@ -48,6 +45,10 @@ export default class CreateProfile extends Component{
     userData["pictures"] = [ document.getElementById("displayimg").value ];
     var userStr = 'http://localhost:5000/users/create';
 
+    /**
+     * Getting user preferences
+     * If user checks button for hobby, hobby gets added into empty obj
+     */
     var prefData = {};
     prefData['email'] = this.state.signupEmail;
     for(let i in this.state.hobbies){
@@ -56,6 +57,9 @@ export default class CreateProfile extends Component{
     }    
     var prefStr = 'http://localhost:5000/preferences/create';
 
+    /**
+     * Error checking for user inputs 
+     */
     axios.post(prefStr, prefData).then((response) => {
       console.log(response);
     }, (error) => {
@@ -80,8 +84,16 @@ export default class CreateProfile extends Component{
      <head>
      </head>
      <body>
+
+          {/**
+           * Bootstrap/JS for creating frontend intereface for "create profile" page 
+           * Has Forms for name, description, age, hobbies, profile image
+           * User input will be inputted into user object 
+          */}
+
          <h1>Create Profile</h1>
          <Container>
+
          <Form onSubmit={() => this.postuser}>
             <Form.Group>
             <Form.Label>Display name</Form.Label>
@@ -101,15 +113,11 @@ export default class CreateProfile extends Component{
             <Form.Control type="number" min="18" max="80" id="age" placeholder="Age"/>
             </Form.Group>
 
-            {/* <Form.Group>
-               <Form.Label>Major</Form.Label>
-               <Form.Select id="major" aria-label="Default select example">
-                  <option value="1">Major1</option>
-                  <option value="2">Major2</option>
-                  <option  value="3">Major3</option>
-               </Form.Select>
-            </Form.Group> */}
-
+            {/**
+             * Hobbies section are checkboxes, users may select which interest they have
+             * Checked hobbies get added into user obj
+            */}
+            
             <Form.Group className="my-2">
                    <Accordion defaultActiveKey="0">
                      <Accordion.Item eventKey="0">
@@ -137,35 +145,13 @@ export default class CreateProfile extends Component{
 
             <Form.Group>
               <Form.Label>Profile Image</Form.Label>
-              <Form.Control type="text" id="displayimg" aria-describedby="displayimgdesc" placeholder="Enter name"/>
+              <Form.Control type="text" id="displayimg" aria-describedby="displayimgdesc" placeholder="Enter image link"/>
               <Form.Text className="text-muted" id="displayimgdesc">Image URL</Form.Text>
             </Form.Group>
 
-            {/*         <Form.Group>
-                    <input class="form-control" type="file"/>
-                 </Form.Group>
-                 <Container className="profileimages-container">
-                 <ButtonGroup className="mb-2">
-                 {images.map((image, idx) => (
-                 <ToggleButton
-                   key={idx}
-                   id={`image-${idx}`}
-                   className="rounded profileimages-select"
-                   type="radio"
-                   variant="outline-primary"
-                   name="images"
-                   value={image.value}
-                   checked={radioValue === image.value}
-                   onChange={(e) => setRadioValue(e.currentTarget.value)}
-                 >
-                   <Figure.Image className="profileimages-image" src={`${image.src}`}/>
-                 </ToggleButton>
-                 ))}
-                 </ButtonGroup>
-                 </Container> */}
-
-
-        
+            {/**
+             * Button allows for submission of user inputs into the user obj
+            */}
             <Button onClick={() => this.postuser()}>Confirm Changes</Button>
         </Form>
       </Container>

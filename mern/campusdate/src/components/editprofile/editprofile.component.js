@@ -4,6 +4,9 @@ import { Accordion, Button, ButtonGroup, Container, Figure, Form, ToggleButton, 
 import React, { useEffect, useState } from "react";
 
 export default function EditProfile() {
+  /**
+   * Setting default values for items
+   */
   const [checked, setChecked] = useState(false);
   const [radioValue, setRadioValue] = useState('1');
   const hobbies = [ {name:'hobby1', value:1}, {name:'hobby2', value:2}, {name:'hobby3', value:3} ]
@@ -19,6 +22,16 @@ export default function EditProfile() {
      <body>
          <h1>Edit Profile</h1>
          <Container>
+
+          {/**
+           * Bootstrap/JS for creating frontend intereface for "edit profile" page 
+           * Has Forms for name, description, age, major, hobbies, profile image
+           * Name, description, age are text input
+           * Major is drop down
+           * Hobbies are check boxes
+           * User can click submit button to edit/change preferences
+          */}
+
          <Form>
             <Form.Group>
             <Form.Label>Display name</Form.Label>
@@ -71,6 +84,9 @@ export default function EditProfile() {
                </Accordion>
             </Form.Group>
 
+          {/**
+           *  Users can edit profile pictures by selecting from files 
+           */}
          <Form.Group>
             <input class="form-control" type="file"/>
          </Form.Group>
@@ -102,7 +118,12 @@ export default function EditProfile() {
 
 </body>
 
-        {/* navigational buttons at bottom of the page w/ links, class has info of aesthetics of buttons */}
+        {/** 
+         * Navigational buttons at bottom of the page w/ links to respective pages
+         * Goes to editprofile, profile, and matches 
+         * Class has info of aesthetics of buttons 
+         */}
+          
         <div class="btn-group d-flex customNavBar" role="group" aria-label="navigational buttons">
           <a href = "/editprofile" button type="button" class="btn btn-secondary w-100 h-100 customNavSize"><Figure.Image className = "customNavImage" src={require('../assets/settingIcon.png')}></Figure.Image></a>
           <a href = "/profile" button type="button" class="btn btn-secondary w-100 h-100 customNavSize"><Figure.Image className = "customNavImage" src={require('../assets/profileIcon.png')}></Figure.Image></a>

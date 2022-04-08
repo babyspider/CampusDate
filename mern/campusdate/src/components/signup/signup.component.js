@@ -59,7 +59,8 @@ export default function Signup() {
         placeholder="email"
         keyboardType = "email-address"
         //value={this.state.email}
-        onChange={handleEmail}//e=>setEmail(e.target.value)}
+        onChange={handleEmail}
+        //e=>setEmail(e.target.value)}
       />
 
       <TextInput

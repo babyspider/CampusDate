@@ -16,6 +16,9 @@ Login.propTypes = {
   setToken: PropTypes.func.isRequired
 };
 
+/**
+ *  Checking for login information 
+ */
 async function loginUser(credentials){
   return fetch('http://localhost:5000/login', {
     method: 'POST',
@@ -41,6 +44,11 @@ export default function Login({setToken}) {
   }
 
   return (
+    /**
+     * Front end visualization for Login page
+     * Contains text input for email and password
+     * Submit button goes to profile page
+     */
     <View style={styles.background}>
     <Text style={styles.title}>CampusDate</Text>
     <TextInput

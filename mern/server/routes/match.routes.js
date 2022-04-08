@@ -1,3 +1,5 @@
+//This is the middleware that connects the matching via routing
+
 let mongoose = require('mongoose'),
     express = require('express'),
     router = express.Router();

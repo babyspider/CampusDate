@@ -7,13 +7,17 @@ import axios from 'axios';
 
 
 const DataTable = props => (
-            <tr>
-                <td>
-                    {props.obj._id}
-                </td>
-            </tr>
+  <tr>
+      <td>
+          {props.obj._id}
+      </td>
+  </tr>
 )
 
+/**
+ * Frontend visualization for matches
+ * Outputs the match name and email 
+ */
 const MatchesList = props => (
   <ListGroup.Item className="matches-item" variant="outline-primary">
      <Row>
@@ -29,16 +33,17 @@ const MatchesList = props => (
   </ListGroup.Item>
 )
 
+/**
+ * Frontend visualization when there are no matches 
+ */
 const EmptyMatchesList = props => (
   <ListGroup.Item className="matches-item" variant="outline-primary"><h2 class="m-3">No matches (yet!)</h2></ListGroup.Item>
-
-
 )
 
 export default class Matches extends Component {
   constructor(props) {
       super(props);
-      const loginEmail = localStorage.getItem("email");
+      const loginEmail = "jkl@email.com"
       this.state = {  loginEmail: loginEmail, usersCollection: [] };
   }
   componentDidMount() {
@@ -47,7 +52,12 @@ export default class Matches extends Component {
           axios.all([getMatches, getUsers]).then(axios.spread((...responses) => {
             const allMatches = responses[0].data;
             const allUsers = responses[1].data;
-            // get all emails of valid matches
+
+            /**
+             * Gets emails of valid matches for specific user 
+             * Valid matches mean both users have hearted each other 
+             */
+
             var matchEmails = [];
             for(let i in allMatches){
               if(allMatches[i]["from_email"] == this.state.loginEmail){
@@ -63,7 +73,9 @@ export default class Matches extends Component {
                 }
               }
             }
-            // get contact info from emails
+            /**
+             * Get contact info from emails 
+             */
             var matchInfo = []
             for(let i in matchEmails){
               for(let j in allUsers){
@@ -81,6 +93,10 @@ export default class Matches extends Component {
               console.log(error);
           })
   }
+
+  /**
+   *  Returns all matches for a user 
+   */
   matchesList(){
     // console.log(this.state.usersCollection.length);
       if(this.state.usersCollection.length != 0){
@@ -104,6 +120,10 @@ export default class Matches extends Component {
      <head>
      </head>
      <body>
+          {/**
+           * Matches name and email is stored in container
+           * Visualization for match display
+           */}
          <h1 class="m-3">Matches</h1>
          <Container>
          <ListGroup class="m-4 matchesPadding">
@@ -113,6 +133,11 @@ export default class Matches extends Component {
 
 
       </body>
+
+      {/**
+       * Navigational buttons at the bottom of the screen
+       * Has links to edit profile, profile, and matches page 
+       */}
 
       <div class="btn-group d-flex customNavBar" role="group" aria-label="navigational buttons">
           <a href = "/editprofile" button type="button" class="btn btn-secondary w-100 h-100 customNavSize"><Figure.Image className = "customNavImage" src={require('../assets/settingIcon.png')}></Figure.Image></a>

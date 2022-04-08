@@ -64,7 +64,7 @@ export default function Login({setToken}) {
       <Pressable
         className="buttons"
         onPress={handleSubmit} type = "submit">
-        <Text className="buttonsText"}>Login</Text>
+        <Text className="buttonsText">Login</Text>
       </Pressable>
       </Link>
     </View>

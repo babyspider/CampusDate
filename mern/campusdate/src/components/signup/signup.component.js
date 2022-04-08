@@ -11,6 +11,7 @@ import {
 import { Link } from "react-router-dom";
 import Constants from 'expo-constants';
 import { useState } from 'react';
+import { useLocalStorage } from "../../useLocalStorage";
 
 const axios = require('axios').default;
 
@@ -20,11 +21,15 @@ const axios = require('axios').default;
 export default function Signup() {
 
 
-  const [email, setEmail] = useState(1);
-  const [password, setPassword] = useState(1);
+  const [email, setEmail] = useLocalStorage("email", "");
+  const [password, setPassword] = useLocalStorage("password", "");
 
   function handleEmail(event){
     setEmail(event.target.value);
+  }
+
+  function handlePass(event){
+    setPassword(event.target.value);
   }
 
   function submit(){
@@ -32,11 +37,13 @@ export default function Signup() {
     formData.append('email',email);
     axios({
       method: "POST",
-      url: "https://localhost:5000/register",
+      url: "https://localhost:5000/user/register",
       data: formData,
       headers: { "Content-Type": "multipart/form-data" },
     }).then(function(response){
       console.log(response);
+      localStorage.setItem("email",email);
+      localStorage.setItem("password",password);
     }).catch(function(response){
       console.log(response);
     });
@@ -58,6 +65,7 @@ export default function Signup() {
         style={styles.inputbox}
         placeholder="password"
         //value={this.formData.password}
+        onChange={handlePass}
       />
 
       <TextInput

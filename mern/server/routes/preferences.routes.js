@@ -1,3 +1,5 @@
+//This is the middleware that connects the preferences via routing
+
 let mongoose = require('mongoose'),
     express = require('express'),
     router = express.Router();

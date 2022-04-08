@@ -1,3 +1,8 @@
+/**
+*This document holds the schema for the 
+*hobbies that each user can have
+*we use this in sorting potential matches
+*/
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 let preferencesSchema = new Schema({
@@ -22,7 +27,9 @@ let preferencesSchema = new Schema({
     videogames: {
         type: Boolean
     }
-}, {
+}, 
+    {
         collection: 'preferences'
-    })
+    }
+    )
 module.exports = mongoose.model('Preferences', preferencesSchema)

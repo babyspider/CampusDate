@@ -4,13 +4,14 @@ import { Accordion, Button, ButtonGroup, Container, Figure, Form, ToggleButton, 
 import React, { Component, useEffect, useState } from "react";
 import placeholder from "../assets/placeholder.png";
 import axios from 'axios';
+import { useLocalStorage } from "../../useLocalStorage";
 const FormData = require('form-data')
 
 export default class CreateProfile extends Component{
   constructor(props) {
       super(props);
-      const signupEmail = "mno@email.com"
-      const signupPwd = "123456"
+      const signupEmail = localStorage.getItem("email");
+      const signupPwd = localStorage.getItem("password");
       this.state = { signupEmail: signupEmail, signupPwd: signupPwd, hobbies: [], getChecked: [], signupForm: {} };
   }
   componentDidMount() {

@@ -60,8 +60,9 @@ export default class CreateProfile extends Component{
      */
     var hasBlank = false;
     for(let i in userData){
-      if(typeof userData[i] !== 'undefined'){
-        hasBlank=true
+      if(!userData[i]){
+        hasBlank = true;
+        console.log(i);
       }
     }
     if(hasBlank){

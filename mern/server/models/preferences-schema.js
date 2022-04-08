@@ -22,7 +22,9 @@ let preferencesSchema = new Schema({
     videogames: {
         type: Boolean
     }
-}, {
+}, 
+    {
         collection: 'preferences'
-    })
+    }
+    )
 module.exports = mongoose.model('Preferences', preferencesSchema)

@@ -1,3 +1,4 @@
+import './login.css';
 import React, {useState} from 'react';
 import {
   Text,
@@ -11,6 +12,10 @@ import {
 import Constants from 'expo-constants';
 import { Link } from "react-router-dom";
 import PropTypes from 'prop-types';
+
+Login.propTypes = {
+  setToken: PropTypes.func.isRequired
+};
 
 async function loginUser(credentials){
   return fetch('http://localhost:5000/login', {
@@ -37,10 +42,10 @@ export default function Login({setToken}) {
   }
 
   return (
-    <View style={styles.background}>
-      <Text style={styles.title}>CampusDate</Text>
+    <View className="background">
+      <Text className="title">CampusDate</Text>
       <TextInput
-        style={styles.inputbox}
+        className="inputbox"
         keyboardType = "email-address"
         placeholder="email"
         autoCorrect = {false}
@@ -48,7 +53,7 @@ export default function Login({setToken}) {
       />
 
       <TextInput
-        style={styles.inputbox}
+        className="inputbox"
         autoCorrect={false}
         placeholder="password"
         secureTextEntry = {true}
@@ -57,54 +62,11 @@ export default function Login({setToken}) {
 
       <Link to="/profile">
       <Pressable
-        style={styles.buttons}
+        className="buttons"
         onPress={handleSubmit} type = "submit">
-        <Text style={styles.buttonsText}>Login</Text>
+        <Text className="buttonsText"}>Login</Text>
       </Pressable>
       </Link>
     </View>
   );
 }
-const styles = StyleSheet.create({
-  inputbox: {
-    backgroundColor: 'white',
-    borderRadius: 5,
-    fontSize: 20,
-    padding: 3,
-    borderColor: 'grey',
-    marginTop: '5%',
-    marginHorizontal: '20%',
-  },
-  buttons: {
-    borderRadius: 20,
-    borderColor: 'grey',
-    marginTop: '5%',
-    marginHorizontal: '20%',
-    textAlign: 'center',
-    borderWidth: 2,
-  },
-  buttonsText: {
-    margin: '1%',
-    textAlign: 'center',
-    color: 'grey',
-    fontSize: 25,
-  },
-  background: {
-    flex: 1,
-    justifyContent: 'center',
-    backgroundColor: 'pink',
-    padding: 8,
-  },
-  title: {
-    backgroundColor: 'none',
-    margin: 1,
-    fontSize: 50,
-    color: 'grey',
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-});
-
-Login.propTypes = {
-  setToken: PropTypes.func.isRequired
-};

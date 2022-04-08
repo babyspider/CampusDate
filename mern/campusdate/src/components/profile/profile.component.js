@@ -33,6 +33,7 @@ export default class ListProfiles extends Component {
             const allPreferences = responses[1].data;
             const myPreferences = responses[2].data[0];
             // get all emails of previously viewed users/users that have already rejected current user
+            console.log(allMatches)
             var pastUsers = [];
             var numMatches = responses[1].data.length;
             for(let i in allMatches){
@@ -42,14 +43,17 @@ export default class ListProfiles extends Component {
                   pastUsers.push(pastUser);
                   numMatches--;                  
                 }
-              }else if(allMatches[i]["to_email"] == loginEmail && !allMatches[i]["ismatch"]){
+              }else if(allMatches[i]["to_email"] == loginEmail && !allMatches[i]["is_match"]){
                 const pastUser = allMatches[i]["from_email"];
                 if(!pastUsers.includes(pastUser)){
                   pastUsers.push(pastUser);
-                  numMatches--;                  
+                  numMatches--;      
+                  console.log(pastUser);      
+                  console.log(allMatches[i]["is_match"]);      
                 }               
               }
             }
+            console.log(pastUsers);
             console.log(numMatches);
             if(numMatches != 1){
               // console.log(pastUsers)
@@ -66,6 +70,7 @@ export default class ListProfiles extends Component {
               }
               // get preference info from unviewed users; set in hobbiesMatch and userHobbies     
               var userHobbies = []
+              console.log(allPreferences);
               for(let i in allPreferences){
                 if(!pastUsers.includes(allPreferences[i]["email"]) && allPreferences[i]["email"] != loginEmail){
                   var numCommon = 0;
@@ -87,6 +92,7 @@ export default class ListProfiles extends Component {
               while(numPreferences > -1 && hobbiesMatch[numPreferences].length == 0){
                 numPreferences--;
               }
+
               console.log(hobbiesMatch);
               this.setState({ userEmail: hobbiesMatch[numPreferences][0] });
               this.setState({ userHobbies: userHobbies[hobbiesMatch[numPreferences][0]]});
@@ -98,6 +104,7 @@ export default class ListProfiles extends Component {
               var getUser = "http://localhost:5000/users/get/" + this.state.userEmail;
               return axios.get(getUser);        
             }
+
           })).then( response => {
             if(response.data[0]["email"] == this.state.loginEmail){
               var noUserInfo = response.data[0];
@@ -108,6 +115,7 @@ export default class ListProfiles extends Component {
             }else{
               this.setState({ userInfo: response.data[0]});            
             }
+            console.log(this.state);
             return this.state
           }).catch(function (error) {
               console.log(error);

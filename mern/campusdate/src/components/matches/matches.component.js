@@ -38,7 +38,7 @@ const EmptyMatchesList = props => (
 export default class Matches extends Component {
   constructor(props) {
       super(props);
-      const loginEmail = "jkl@email.com"
+      const loginEmail = "ghi@email.com"
       this.state = {  loginEmail: loginEmail, usersCollection: [] };
   }
   componentDidMount() {

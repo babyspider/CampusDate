@@ -5,26 +5,15 @@ let mongoose = require('mongoose'),
     router = express.Router();
 
 let preferences = require('../models/preferences-schema');
-// router.route('/create').post((req, res, next) => {
-//     preferences.create(req.body, (error, data) => {
-//         if (error) {
-//             return next(error)
-//         } else {
-//             console.log(data)
-//             res.json(data)
-//         }
-//     })
-// });
 
 router.post('/create', async(req, res) => {
-    // console.log(req.body);
     const newPref = new preferences(req.body);
     newPref
     .save()
     .then(() => res.json("New match created!"))    
 });
 
-// 
+//Gets the predereces from the Preference Collection 
 router.route('/').get((req, res) => {
     preferences.find((error, data) => {
         if (error) {
@@ -44,17 +33,7 @@ router.route('/find/:email').get((req, res) => {
         }
     })
 })
-
-// router.route('/findfor/:email').get((req, res) => {
-//     preferences.find({email: req.params.email}, (error, data) => {
-//         if (error) {
-//             return next(error)
-//         } else {
-//             res.json(data)
-//         }
-//     })
-// })
-
+//Creates a preference in the Preference Collection
 router.route('/create').post((req, res, next) => {
     preferences.create(req.body, (error, data) => {
         if (error) {
@@ -65,7 +44,7 @@ router.route('/create').post((req, res, next) => {
         }
     })
 });
-
+//Edits a preference in the Prefernce Collection
 router.route('/edit/:id').get((req, res) => {
     preferences.findById(req.params.id, (error, data) => {
         if (error) {
@@ -75,7 +54,7 @@ router.route('/edit/:id').get((req, res) => {
         }
     })
 })
-
+//Updates a preference in the Preference Collection
 router.route('/update/:id').put((req, res, next) => {
     preferences.findByIdAndUpdate(req.params.id, {
         $set: req.body
@@ -89,6 +68,7 @@ router.route('/update/:id').put((req, res, next) => {
         }
     })
 })
+//Deletes a preference in the Preference Collection
 router.route('/delete/:id').delete((req, res, next) => {
     preferences.findByIdAndRemove(req.params.id, (error, data) => {
         if (error) {

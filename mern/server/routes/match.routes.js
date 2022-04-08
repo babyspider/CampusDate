@@ -6,6 +6,7 @@ let mongoose = require('mongoose'),
 
 let match = require('../models/match-schema');
 
+//Creates a match between femail to temail in the Matches Collection
 router.post('/create/:femail/:temail/:isMatch', (req, res) => {
     const newMatch = new match({from_email: req.params.femail,
                                 to_email: req.params.temail,
@@ -15,6 +16,7 @@ router.post('/create/:femail/:temail/:isMatch', (req, res) => {
     .then(() => res.json("New match created!"))    
 });
 
+//Gets match from Matches Collection
 router.route('/').get((req, res) => {
     match.find((error, data) => {
         if (error) {
@@ -24,6 +26,7 @@ router.route('/').get((req, res) => {
         }
     })
 })
+//Edits match in the Matches Collection
 router.route('/edit/:id').get((req, res) => {
     match.findById(req.params.id, (error, data) => {
         if (error) {
@@ -33,7 +36,7 @@ router.route('/edit/:id').get((req, res) => {
         }
     })
 })
-
+//Updates a match in the Matches Collection
 router.route('/update/:id').put((req, res, next) => {
     match.findByIdAndUpdate(req.params.id, {
         $set: req.body
@@ -47,6 +50,8 @@ router.route('/update/:id').put((req, res, next) => {
         }
     })
 })
+
+//Deletes a match in the Matches Collection
 router.route('/delete/:id').delete((req, res, next) => {
     match.findByIdAndRemove(req.params.id, (error, data) => {
         if (error) {

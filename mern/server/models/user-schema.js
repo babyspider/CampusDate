@@ -10,8 +10,8 @@ let userSchema = new Schema({
     name:{
         type: String
     },
-    dob:{
-        type: Date
+    age:{
+        type: Number
     },
     pictures:{
         type: Array

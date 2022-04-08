@@ -20,7 +20,7 @@ export default class ListProfiles extends Component {
   constructor(props) {
       super(props);
       
-      this.state = { loginEmail: "def@email.com", userEmail: "", userInfo: {}, userHobbies: {} };
+      this.state = { loginEmail: "ghi@email.com", userEmail: "", userInfo: {}, userHobbies: {} };
   }
   componentDidMount() {    
     const loginEmail = this.state.loginEmail
@@ -34,57 +34,64 @@ export default class ListProfiles extends Component {
             const myPreferences = responses[2].data[0];
             // get all emails of previously viewed users/users that have already rejected current user
             var pastUsers = [];
+            var numMatches = responses[1].data.length;
             for(let i in allMatches){
               if(allMatches[i]["from_email"] == loginEmail){
                 const pastUser = allMatches[i]["to_email"];
-                pastUsers.push(pastUser);
-              }
-              if(allMatches[i]["to_email"] == loginEmail && !allMatches[i]["ismatch"]){
-                const pastUser = allMatches[i]["from_email"];
-                pastUsers.push(pastUser);                
-              }
-            }
-            // console.log(pastUsers)
-            // get list, total number of possible hobbies
-            var hobbiesMatch = {};
-            var listPreferences = Object.keys(allPreferences[0]);
-            listPreferences.shift();
-            listPreferences.shift();
-            // create dict for matching hobbies
-            var numPreferences = listPreferences.length;
-            while(numPreferences > -1){
-              hobbiesMatch[numPreferences] = [];
-              numPreferences--;
-            }
-            // get preference info from unviewed users; set in hobbiesMatch and userHobbies     
-            var userHobbies = []
-            var numMatches = 0;
-            for(let i in allPreferences){
-              if(!pastUsers.includes(allPreferences[i]["email"]) && allPreferences[i]["email"] != loginEmail){
-                var numCommon = 0;
-                userHobbies[allPreferences[i]["email"]] = []           
-                for(let j in listPreferences){
-                  if(allPreferences[i][listPreferences[j]]){
-                    userHobbies[allPreferences[i]["email"]].push(listPreferences[j]);
-                  }
-                  if(myPreferences[listPreferences[j]] && allPreferences[i][listPreferences[j]] == myPreferences[listPreferences[j]]){
-                    numCommon++;
-                  }                  
+                if(!pastUsers.includes(pastUser)){
+                  pastUsers.push(pastUser);
+                  numMatches--;                  
                 }
-                numMatches++;
-                hobbiesMatch[numCommon].push(allPreferences[i]["email"]);
+              }else if(allMatches[i]["to_email"] == loginEmail && !allMatches[i]["ismatch"]){
+                const pastUser = allMatches[i]["from_email"];
+                if(!pastUsers.includes(pastUser)){
+                  pastUsers.push(pastUser);
+                  numMatches--;                  
+                }               
               }
             }
-            if(numMatches != 0){
-            // get hobby and profile info on top user
-            numPreferences = listPreferences.length;
-            while(numPreferences > -1 && hobbiesMatch[numPreferences].length == 0){
-              numPreferences--;
-            }
+            console.log(numMatches);
+            if(numMatches != 1){
+              // console.log(pastUsers)
+              // get list, total number of possible hobbies
+              var hobbiesMatch = {};
+              var listPreferences = Object.keys(allPreferences[0]);
+              listPreferences.shift();
+              listPreferences.shift();
+              // create dict for matching hobbies
+              var numPreferences = listPreferences.length;
+              while(numPreferences > -1){
+                hobbiesMatch[numPreferences] = [];
+                numPreferences--;
+              }
+              // get preference info from unviewed users; set in hobbiesMatch and userHobbies     
+              var userHobbies = []
+              for(let i in allPreferences){
+                if(!pastUsers.includes(allPreferences[i]["email"]) && allPreferences[i]["email"] != loginEmail){
+                  var numCommon = 0;
+                  userHobbies[allPreferences[i]["email"]] = []           
+                  for(let j in listPreferences){
+                    if(allPreferences[i][listPreferences[j]]){
+                      userHobbies[allPreferences[i]["email"]].push(listPreferences[j]);
+                    }
+                    if(myPreferences[listPreferences[j]] && allPreferences[i][listPreferences[j]] == myPreferences[listPreferences[j]]){
+                      numCommon++;
+                    }                  
+                  }
+                  hobbiesMatch[numCommon].push(allPreferences[i]["email"]);
+                }
+              }
+
+              // get hobby and profile info on top user
+              numPreferences = listPreferences.length;
+              while(numPreferences > -1 && hobbiesMatch[numPreferences].length == 0){
+                numPreferences--;
+              }
+              console.log(hobbiesMatch);
               this.setState({ userEmail: hobbiesMatch[numPreferences][0] });
               this.setState({ userHobbies: userHobbies[hobbiesMatch[numPreferences][0]]});
-            var getUser = "http://localhost:5000/users/get/" + hobbiesMatch[numPreferences][0];
-            return axios.get(getUser);
+              var getUser = "http://localhost:5000/users/get/" + hobbiesMatch[numPreferences][0];
+              return axios.get(getUser);
             }else{
               this.setState({ userEmail: this.state.loginEmail });
               this.setState({ userHobbies: [] });   

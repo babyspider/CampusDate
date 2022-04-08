@@ -3,17 +3,26 @@ let mongoose = require('mongoose'),
     router = express.Router();
 
 let preferences = require('../models/preferences-schema');
-router.route('/create').post((req, res, next) => {
-    preferences.create(req.body, (error, data) => {
-        if (error) {
-            return next(error)
-        } else {
-            console.log(data)
-            res.json(data)
-        }
-    })
+// router.route('/create').post((req, res, next) => {
+//     preferences.create(req.body, (error, data) => {
+//         if (error) {
+//             return next(error)
+//         } else {
+//             console.log(data)
+//             res.json(data)
+//         }
+//     })
+// });
+
+router.post('/create', async(req, res) => {
+    // console.log(req.body);
+    const newPref = new preferences(req.body);
+    newPref
+    .save()
+    .then(() => res.json("New match created!"))    
 });
 
+// 
 router.route('/').get((req, res) => {
     preferences.find((error, data) => {
         if (error) {

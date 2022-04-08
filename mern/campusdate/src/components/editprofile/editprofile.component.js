@@ -93,7 +93,7 @@ export default function EditProfile() {
          ))}
          </ButtonGroup>
          </Container>         
-            <Button type="submit">Confirm Changes</Button>
+            <Button type="submit" className = "submitButtonPadding">Confirm Changes</Button>
          </Form>
 
 
@@ -101,6 +101,15 @@ export default function EditProfile() {
 
 
 </body>
+
+        {/* navigational buttons at bottom of the page w/ links, class has info of aesthetics of buttons */}
+        <div class="btn-group d-flex customNavBar" role="group" aria-label="navigational buttons">
+          <a href = "/editprofile" button type="button" class="btn btn-secondary w-100 h-100 customNavSize"><Figure.Image className = "customNavImage" src={require('../assets/settingIcon.png')}></Figure.Image></a>
+          <a href = "/profile" button type="button" class="btn btn-secondary w-100 h-100 customNavSize"><Figure.Image className = "customNavImage" src={require('../assets/profileIcon.png')}></Figure.Image></a>
+          <a href = "/matches" button type="button" class="btn btn-secondary w-100 h-100 customNavSize"><Figure.Image className = "customNavImage" src={require('../assets/chatIcon.png')}></Figure.Image></a>
+        </div>
+
+
       </main>
     );
 }

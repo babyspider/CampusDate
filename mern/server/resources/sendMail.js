@@ -1,3 +1,8 @@
+/**
+* This file contains the function that sends the email to the new user
+* It also checks the email sends is sent from the server
+*/
+
 const {email_host, email_user, email_pass} = require('./config.json');
 const nodemailer = require("nodemailer");
 

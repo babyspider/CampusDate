@@ -1,3 +1,10 @@
+/** 
+* This is our main server document
+* it initializes all the functions and routes 
+* for processing the users data
+* it also calls the functions like email
+*/
+
 let express = require('express');
 let mongoose = require('mongoose');
 let cors = require('cors');

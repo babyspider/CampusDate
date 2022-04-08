@@ -37,12 +37,10 @@ export default class CreateProfile extends Component{
   */
   postuser() {
     var userData = {};
-    userData['email'] = this.state.signupEmail;
-    userData['password'] = this.state.signupPwd;
     userData["name"] = document.getElementById("displayname").value;
     userData["desc"] = document.getElementById("blurb").value;
     userData["age"] = document.getElementById("age").value;
-    userData["pictures"] = [ document.getElementById("displayimg").value ];
+    userData["pictures"] = document.getElementById("displayimg").value;
     var userStr = 'http://localhost:5000/users/create';
 
     /**
@@ -60,17 +58,32 @@ export default class CreateProfile extends Component{
     /**
      * Error checking for user inputs 
      */
-    axios.post(prefStr, prefData).then((response) => {
-      console.log(response);
-    }, (error) => {
-      console.log(error);
-    });     
-    axios.post(userStr, userData).then((response) => {
-      console.log(response);
-    }, (error) => {
-      console.log(error);
-    });     
-  window.location.href = "http://localhost:3000/profile";
+    var hasBlank = false;
+    for(let i in userData){
+      if(typeof userData[i] !== 'undefined'){
+        hasBlank=true
+      }
+    }
+    if(hasBlank){
+      document.getElementById("errormsg").innerHTML = "ERROR: One or more fields missing!";
+    }else{
+      userData['email'] = this.state.signupEmail;
+      userData['password'] = this.state.signupPwd;
+      userData["pictures"] = [ document.getElementById("displayimg").value ];
+      axios.post(prefStr, prefData).then((response) => {
+        console.log(response);
+      }, (error) => {
+        console.log(error);
+      });     
+      axios.post(userStr, userData).then((response) => {
+        console.log(response);
+      }, (error) => {
+        console.log(error);
+      });
+      window.location.href = "http://localhost:3000/profile";          
+    }
+ 
+  // window.location.href = "http://localhost:3000/profile";
   }
 
   Toggle_checkbox=()=>{
@@ -152,7 +165,10 @@ export default class CreateProfile extends Component{
             {/**
              * Button allows for submission of user inputs into the user obj
             */}
+            
             <Button onClick={() => this.postuser()}>Confirm Changes</Button>
+            <span id="errormsg"></span>
+
         </Form>
       </Container>
       </body>

@@ -25,7 +25,7 @@ async function loginUser(username,password){
       }else{
         document.getElementById("errormsg").innerHTML = "ERROR: Incorrect Email or Password!";
       }
-  });
+  })
 };
 
 export default function Login({setToken}) {

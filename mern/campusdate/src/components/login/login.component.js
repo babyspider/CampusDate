@@ -23,10 +23,9 @@ async function loginUser(username,password){
         localStorage.setItem("password",password);
         window.location.href = "http://localhost:3000/profile";      
       }else{
-        Alert.alert("Incorrect Email or Password");
+        document.getElementById("errormsg").innerHTML = "ERROR: Incorrect Email or Password!";
       }
   });
-
 };
 
 export default function Login({setToken}) {
@@ -71,6 +70,7 @@ export default function Login({setToken}) {
         <Text style={styles.buttonsText}>Login</Text>
       </Pressable>
       </Link>
+      <span id="errormsg"></span>
     </View>
   );
 }

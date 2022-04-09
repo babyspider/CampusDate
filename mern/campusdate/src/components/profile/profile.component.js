@@ -50,17 +50,22 @@ export default class ListProfiles extends Component {
               if(allMatches[i]["from_email"] == loginEmail){
                 const pastUser = allMatches[i]["to_email"];
                 if(!pastUsers.includes(pastUser)){
+                  // console.log(allMatches[i]);
+                  // console.log(pastUser);
                   pastUsers.push(pastUser);
                   numMatches--;                  
                 }
-              }else if(allMatches[i]["to_email"] == loginEmail && !allMatches[i]["ismatch"]){
+              }else if(allMatches[i]["to_email"] == loginEmail && !allMatches[i]["is_match"]){
                 const pastUser = allMatches[i]["from_email"];
                 if(!pastUsers.includes(pastUser)){
+                  console.log(allMatches[i]);
+                  console.log(pastUser);
                   pastUsers.push(pastUser);
                   numMatches--;                  
                 }               
               }
             }
+            console.log(pastUsers);
             console.log(numMatches);
             if(numMatches != 1){
               // console.log(pastUsers)

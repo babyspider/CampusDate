@@ -42,14 +42,12 @@ router.route('/login/:data').get((req,res) => {
     var info = req.params.data.split(':');
     console.log(info);
 
-    users.find({email: info[0]}, (error,data) => {
+    users.find({email: info[0], password: info[1]}, (error,data) => {
         if(error){
             return next(error)
         } else {
-            // console.log(data[0].password);
-            let response = data[0].password==info[1];
-            console.log(response);
-            res.send(response);
+            console.log(data);
+            res.send(data);
         }
     })
     /*res.send({

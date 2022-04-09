@@ -24,7 +24,8 @@ export default class ListProfiles extends Component {
    */
   constructor(props) {
       super(props);
-      const loginEmail = localStorage.getItem("email");
+      // const loginEmail = localStorage.getItem("email");
+      const loginEmail = "mno@email.com";
       this.state = { loginEmail: loginEmail, userEmail: "", userInfo: {}, userHobbies: {} };
   }
   componentDidMount() {    

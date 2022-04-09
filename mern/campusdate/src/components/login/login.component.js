@@ -15,27 +15,17 @@ import axios from 'axios';
 import { useLocalStorage } from "../../useLocalStorage";
 
 async function loginUser(username,password){
-  var data = axios.get("http://localhost:5000/users/login/"+username+":"+password);
-  console.log(data);
-  if(data){
-    localStorage.setItem("email",username);
-    localStorage.setItem("password",password);
-    window.location.href = "http://localhost:3000/profile";
-  }else{
-    Alert.alert("Incorrect Email or Password");
-  }
-  return data;
-  /*return fetch('http://localhost:5000/login', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(credentials)
-  })
-    .then(data=>{
-      data.json();
-      console.log(data);
-    })*/
+  await axios.get("http://localhost:5000/users/login/"+username+":"+password)
+  .then( response => {
+      console.log(response.data);
+      if(response.data.length == 1){
+        localStorage.setItem("email",username);
+        localStorage.setItem("password",password);
+        window.location.href = "http://localhost:3000/profile";      
+      }else{
+        Alert.alert("Incorrect Email or Password");
+      }
+  });
 
 };
 

@@ -5,6 +5,9 @@ import React, { Component, useEffect, useState } from "react";
 import placeholder from "../assets/placeholder.png"
 import axios from 'axios';
 
+import { faker } from '@faker-js/faker';
+
+
 
 const DataTable = props => (
   <tr>
@@ -43,22 +46,59 @@ const EmptyMatchesList = props => (
 export default class Matches extends Component {
   constructor(props) {
       super(props);
-      // const loginEmail = "mno@email.com";
+      // TEST DATA
+      // const loginEmail = faker.internet.email();
       const loginEmail = localStorage.getItem("email");
       this.state = {  loginEmail: loginEmail, usersCollection: [] };
   }
   componentDidMount() {
+    //TEST USERS DATA
+      var testUsers = []
+      for(let i = 0; i < 5; i++){
+        var tempEmail = faker.internet.email();
+        var tempName = faker.name.firstName();
+        var tempUser = {
+          "email" : tempEmail,
+          "age" : faker.datatype.number({ min: 18, max: 100 }),
+          "desc" : "This is " + tempName,
+          "name": tempName,
+          "password": faker.random.alphaNumeric(5),
+          "pictures": [ faker.image.people() ]
+        }
+        testUsers.push(tempUser);
+        
+      }
+    //TEST MATCHES DATA
+      var testMatches = []
+      for(let i in testUsers){      
+        if(faker.datatype.boolean()){
+          var testmatch = { "from_email" : testUsers[i]["email"], "to_email" : this.state.loginEmail, "is_match" : faker.datatype.boolean() };
+          testMatches.push(testmatch);
+        }
+        if(faker.datatype.boolean()){
+          var testmatch = { "from_email" : this.state.loginEmail, "to_email" : testUsers[i]["email"], "is_match" : faker.datatype.boolean() };
+          testMatches.push(testmatch);
+        }
+        for(let j in testUsers){
+          if(faker.datatype.boolean() && i != j){
+            var testmatch = { "from_email" : testUsers[i]["email"], "to_email" : testUsers[j]["email"], "is_match" : faker.datatype.boolean() };
+            testMatches.push(testmatch);
+          }
+        }
+      }
+      console.log(testUsers)
+      const allMatches = testMatches;
+      const allUsers = testUsers;
+
     const getMatches = axios.get('http://localhost:5000/matches')
-    const getUsers = axios.get('http://localhost:5000/users')    
+    const getUsers = axios.get('http://localhost:5000/users')
           axios.all([getMatches, getUsers]).then(axios.spread((...responses) => {
             const allMatches = responses[0].data;
             const allUsers = responses[1].data;
-
             /**
              * Gets emails of valid matches for specific user 
              * Valid matches mean both users have hearted each other 
              */
-
             var matchEmails = [];
             for(let i in allMatches){
               if(allMatches[i]["from_email"] == this.state.loginEmail){
@@ -74,6 +114,7 @@ export default class Matches extends Component {
                 }
               }
             }
+
             /**
              * Get contact info from emails 
              */

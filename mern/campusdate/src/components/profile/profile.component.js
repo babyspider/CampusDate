@@ -12,6 +12,8 @@ import { useLocalStorage } from "../../useLocalStorage";
 
 import { Link } from "react-router-dom";
 
+import { faker } from '@faker-js/faker';
+
 const DataTable = props => (
     <div class="col-lg-4 matchedOnPadding"> {/* padding = spacing b/t the form boxes */}
       <Form.Control class = "form-control text-center" type="text"  placeholder={props.obj} disabled></Form.Control>
@@ -24,11 +26,62 @@ export default class ListProfiles extends Component {
    */
   constructor(props) {
       super(props);
+      // TEST DATA
+      // const loginEmail = faker.internet.email();
       const loginEmail = localStorage.getItem("email");
-      // const loginEmail = "mno@email.com";
       this.state = { loginEmail: loginEmail, userEmail: "", userInfo: {}, userHobbies: {} };
   }
   componentDidMount() {    
+    // TEST DATA
+      var testUsers = []
+      for(let i = 0; i < 5; i++){
+        testUsers.push(faker.internet.email())
+      }
+    //TEST MATCHES DATA
+      var testMatches = []
+      for(let i in testUsers){      
+        if(faker.datatype.boolean()){
+          var testmatch = { "from_email" : testUsers[i], "to_email" : this.state.loginEmail, "is_match" : faker.datatype.boolean() };
+          testMatches.push(testmatch);
+        }
+        if(faker.datatype.boolean()){
+          var testmatch = { "from_email" : this.state.loginEmail, "to_email" : testUsers[i], "is_match" : faker.datatype.boolean() };
+          testMatches.push(testmatch);
+        }
+        for(let j in testUsers){
+          if(faker.datatype.boolean() && i != j){
+            var testmatch = { "from_email" : testUsers[i], "to_email" : testUsers[j], "is_match" : faker.datatype.boolean() };
+            testMatches.push(testmatch);
+          }
+        }
+      }
+      console.log(testMatches);
+    //TEST PREFERENCES DATA
+      var testPreferences = []
+      for(let i in testUsers){
+         var userPrefs = { email : testUsers[i],
+          "anime" : faker.datatype.boolean(),
+          "art" : faker.datatype.boolean(),
+          "cooking" : faker.datatype.boolean(),
+          "reading" : faker.datatype.boolean(),
+          "sports" : faker.datatype.boolean(),
+          "videogames" : faker.datatype.boolean()
+        };
+        testPreferences.push(userPrefs);
+      }
+      console.log(testPreferences);
+      var loginUserPrefs = { email : this.state.loginEmail,
+        "anime" : faker.datatype.boolean(),
+        "art" : faker.datatype.boolean(),
+        "cooking" : faker.datatype.boolean(),
+        "reading" : faker.datatype.boolean(),
+        "sports" : faker.datatype.boolean(),
+        "videogames" : faker.datatype.boolean()
+      };
+      console.log(loginUserPrefs);
+      const allMatches = testMatches;
+      const allPreferences = testPreferences;
+      const myPreferences = loginUserPrefs;
     /**
      * Getting user information from various pages 
      */
@@ -41,6 +94,9 @@ export default class ListProfiles extends Component {
             const allMatches = responses[0].data;
             const allPreferences = responses[1].data;
             const myPreferences = responses[2].data[0];
+            console.log(allMatches);
+            console.log(allPreferences);
+            console.log(myPreferences);
             /** 
              * Get all emails of previously viewed users/users that have already rejected current user 
              */
@@ -50,25 +106,18 @@ export default class ListProfiles extends Component {
               if(allMatches[i]["from_email"] == loginEmail){
                 const pastUser = allMatches[i]["to_email"];
                 if(!pastUsers.includes(pastUser)){
-                  // console.log(allMatches[i]);
-                  // console.log(pastUser);
                   pastUsers.push(pastUser);
                   numMatches--;                  
                 }
               }else if(allMatches[i]["to_email"] == loginEmail && !allMatches[i]["is_match"]){
                 const pastUser = allMatches[i]["from_email"];
                 if(!pastUsers.includes(pastUser)){
-                  console.log(allMatches[i]);
-                  console.log(pastUser);
                   pastUsers.push(pastUser);
                   numMatches--;                  
                 }               
               }
             }
-            console.log(pastUsers);
-            console.log(numMatches);
             if(numMatches != 1){
-              // console.log(pastUsers)
 
               /**
                *  Get a list for total number of possible hobbies

@@ -16,13 +16,44 @@ import { useLocalStorage } from "../../useLocalStorage";
 const axios = require('axios').default;
 
 
+async function signupUser(email, password){
+  var doesExist = false;
+  await axios.get("http://localhost:5000/users")
+  .then( response => {
+    const existingUsers = response.data;
+      for(let i in existingUsers){
+        if(existingUsers[i]["email"] == email){
+          doesExist = true;
+        }
+      }
+  })
+  if(doesExist){
+    document.getElementById("errormsg").innerHTML = "ERROR: Email already in database!";
+  }else{
+    localStorage.setItem("email",email);
+    localStorage.setItem("password",password)
+    window.location.href = "http://localhost:3000/createprofile";     
+  }
+};
 
+async function noMatch(){
+  document.getElementById("errormsg").innerHTML = "ERROR: Passwords do not match!";
+}
+
+async function noValue(){
+  document.getElementById("errormsg").innerHTML = "ERROR: Empty email/password!";
+}
+
+async function noRPI(){
+  document.getElementById("errormsg").innerHTML = "ERROR: Not an RPI email!";
+}
 
 export default function Signup() {
 
 
   const [email, setEmail] = useState();//useLocalStorage("email", "");
   const [password, setPassword] = useState();//useLocalStorage("password", "");
+  const [passwordTwo, setPasswordTwo] = useState();//useLocalStorage("password", "");
 
   function handleEmail(event){
     setEmail(event.target.value);
@@ -35,25 +66,31 @@ export default function Signup() {
   /**
    * Submit button for sign-up registers in user inputs to MongoDB 
    */
-  function submit(){
-    var formData = new FormData();
-    formData.append('email',email);
-    var result = axios.get("http://localhost:5000/users/register/"+email);
-    console.log(result);
-    localStorage.setItem("email",email);
-    localStorage.setItem("password",password);
-    /*axios({
-      method: "POST",
-      url: `https://localhost:5000/users/register`,
-      data: formData,
-      headers: { "Content-Type": "multipart/form-data" },
-    }).then(function(response){
-      console.log(response);
-      localStorage.setItem("email",email);
-      localStorage.setItem("password",password);
-    }).catch(function(response){
-      console.log(response);
-    });*/
+  const handleSubmit = async e => {
+
+    const getUsers = axios.get('http://localhost:5000/users')
+    console.log(email)
+    console.log(password)
+    console.log(passwordTwo)
+    if(typeof email === "undefined" || typeof password === "undefined" || email == "" || password == "" ){
+      console.log("ok")
+      await noValue();
+    }else if(password != passwordTwo){
+      console.log("killUser()")
+      await noMatch();
+    }else if(email.substr(email.length-8, email.length) != "@rpi.edu"){
+      await noRPI();
+    }else{
+      await signupUser(email, password);
+    }
+    // e.preventDefault();
+    // console.log(e.target);
+    // const token = await loginUser(username,password);
+    
+    // setToken(token);
+    // console.log(token);
+
+    // return token;
   }
 
   return (
@@ -67,6 +104,7 @@ export default function Signup() {
 
     <TextInput
       style={styles.inputbox}
+      id="email"
       placeholder="email"
       keyboardType = "email-address"
       //value={this.state.email}
@@ -75,22 +113,24 @@ export default function Signup() {
 
     <TextInput
       style={styles.inputbox}
+      id="password"
       placeholder="password"
-      //value={this.formData.password}
+      onChange={e => setPassword(e.target.value)}
     />
 
     <TextInput
       style={styles.inputbox}
       placeholder="confirm password"
+      onChange={e => setPasswordTwo(e.target.value)}
     />
 
-    <Link to="/createprofile">
     <Pressable
       style={styles.buttons}
-      onPress={submit}>
+      onPress={handleSubmit}>
       <Text style={styles.buttonsText}>Sign Up</Text>
     </Pressable>
-    </Link>
+
+    <span id="errormsg"></span>
   </View>
 );
 }

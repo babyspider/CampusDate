@@ -1,21 +1,11 @@
-import logo from './logo.svg';
 import './App.css';
-
 import * as React from 'react';
-import { Component, Navigation } from 'react';
+import { Component} from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Link } from "react-router-dom";
+import { Text, View, StyleSheet, Pressable} from 'react-native';
 
-// import Login from './login/login.component";
-import useToken from './useToken';
 
-// import * as React from 'react';
-import { Text, View, StyleSheet, Pressable, Button, Alert} from 'react-native';
-import Constants from 'expo-constants';
-
-// import { NavigationContainer } from 'react-navigation/native';
-// import { createNativeStackNavigator } from '@react-navigation/native-stack';
 function setToken(userToken) {
   sessionStorage.setItem('token', JSON.stringify(userToken));
 }
@@ -59,12 +49,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 });
-    // const {token,setToken} = useToken();
-
-    // if(!token) {
-      //return <Login setToken={setToken} />
-    // }
-
     return (
     <View style={styles.background}>
       <Text style={styles.title}>CampusDate</Text>

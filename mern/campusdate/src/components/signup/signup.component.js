@@ -4,15 +4,9 @@ import {
   View,
   StyleSheet,
   Pressable,
-  Button,
-  Alert,
   TextInput,
 } from 'react-native';
-import { Link } from "react-router-dom";
-import Constants from 'expo-constants';
 import { useState } from 'react';
-import { useLocalStorage } from "../../useLocalStorage";
-
 const axios = require('axios').default;
 
 
@@ -83,14 +77,6 @@ export default function Signup() {
     }else{
       await signupUser(email, password);
     }
-    // e.preventDefault();
-    // console.log(e.target);
-    // const token = await loginUser(username,password);
-    
-    // setToken(token);
-    // console.log(token);
-
-    // return token;
   }
 
   return (
@@ -107,8 +93,7 @@ export default function Signup() {
       id="email"
       placeholder="email"
       keyboardType = "email-address"
-      //value={this.state.email}
-      onChange={handleEmail}//e=>setEmail(e.target.value)}
+      onChange={handleEmail}
     />
 
     <TextInput

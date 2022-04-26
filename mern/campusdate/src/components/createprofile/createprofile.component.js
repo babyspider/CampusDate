@@ -1,8 +1,7 @@
 
 import './createprofile.css';
-import { Accordion, Button, ButtonGroup, Container, Figure, Form, ToggleButton, ToggleButtonGroup } from "react-bootstrap";
-import React, { Component, useEffect, useState } from "react";
-import placeholder from "../assets/placeholder.png";
+import { Accordion, Button, Container, Form, ToggleButton, ToggleButtonGroup } from "react-bootstrap";
+import React, { Component } from "react";
 import axios from 'axios';
 const FormData = require('form-data')
 
@@ -14,7 +13,7 @@ export default class CreateProfile extends Component{
       this.state = { signupEmail: signupEmail, signupPwd: signupPwd, hobbies: [], getChecked: [], signupForm: {} };
   }
   componentDidMount() {
-    const getHobbies = axios.get('http://localhost:5000/preferences/find/abc@email.com')
+    const getHobbies = axios.get('http://localhost:5000/preferences/find/pattg96@rpi.edu')
           axios.all([getHobbies]).then(axios.spread((...responses) => {
             const gotHobbies = responses[0].data[0];
           
@@ -83,8 +82,6 @@ export default class CreateProfile extends Component{
       });
       window.location.href = "http://localhost:3000/profile";          
     }
- 
-  // window.location.href = "http://localhost:3000/profile";
   }
 
   Toggle_checkbox=()=>{

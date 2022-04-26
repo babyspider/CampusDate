@@ -1,17 +1,8 @@
 import './listofprofiles.css';
-// import * as React from 'react';
-import React, { Component, useEffect} from "react";
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text,  View, Alert, SafeAreaView, TouchableOpacity, Image, ScrollView, Pressable, Dimensions, useState} from 'react-native';
-// import { ScrollView } from 'react-native';
-import { Accordion, Button, ButtonGroup, Container, Figure, Form, ToggleButton, ToggleButtonGroup } from "react-bootstrap";
-import placeholder from "../assets/placeholder.png"
+import React, { Component} from "react";
+import { Text, ScrollView} from 'react-native';
+import {Container, Figure, Form} from "react-bootstrap";
 import axios from 'axios';
-
-import { useLocalStorage } from "../../useLocalStorage";
-
-import { Link } from "react-router-dom";
-
 import { faker } from '@faker-js/faker';
 
 const DataTable = props => (
@@ -27,7 +18,6 @@ export default class ListProfiles extends Component {
   constructor(props) {
       super(props);
       // TEST DATA
-      // const loginEmail = faker.internet.email();
       const loginEmail = localStorage.getItem("email");
       this.state = { loginEmail: loginEmail, userEmail: "", userInfo: {}, userHobbies: {} };
   }
@@ -223,8 +213,6 @@ export default class ListProfiles extends Component {
   }
 
   render() {
-
-  // const hobbies = [ {name:'hobby1', value:1}, {name:'hobby2', value:2}, {name:'hobby3', value:3},{name:'hobby4', value:4}, {name:'hobby5', value:5},{name:'hobby6', value:6},{name:'hobby7', value:7},{name:'hobby8', value:8},{name:'hobby9', value:9}]
 
   return(
 

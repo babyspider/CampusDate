@@ -1,7 +1,7 @@
 
 import './editprofile.css';
 import { Accordion, Button, ButtonGroup, Container, Figure, Form, ToggleButton, ToggleButtonGroup } from "react-bootstrap";
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 
 export default function EditProfile() {
   /**

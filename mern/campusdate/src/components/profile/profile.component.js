@@ -150,7 +150,6 @@ export default class ListProfiles extends Component {
               while(numPreferences > -1 && hobbiesMatch[numPreferences].length == 0){
                 numPreferences--;
               }
-              console.log(hobbiesMatch);
               this.setState({ userEmail: hobbiesMatch[numPreferences][0] });
               this.setState({ userHobbies: userHobbies[hobbiesMatch[numPreferences][0]]});
               var getUser = "http://localhost:5000/users/get/" + hobbiesMatch[numPreferences][0];

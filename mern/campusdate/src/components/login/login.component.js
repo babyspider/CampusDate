@@ -17,7 +17,6 @@ import { useLocalStorage } from "../../useLocalStorage";
 async function loginUser(username,password){
   await axios.get("http://localhost:5000/users/login/"+username+":"+password)
   .then( response => {
-      console.log(response.data);
       if(response.data.length == 1){
         localStorage.setItem("email",username);
         localStorage.setItem("password",password);

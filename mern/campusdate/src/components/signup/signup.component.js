@@ -63,14 +63,9 @@ export default function Signup() {
   const handleSubmit = async e => {
 
     const getUsers = axios.get('http://localhost:5000/users')
-    console.log(email)
-    console.log(password)
-    console.log(passwordTwo)
     if(typeof email === "undefined" || typeof password === "undefined" || email == "" || password == "" ){
-      console.log("ok")
       await noValue();
     }else if(password != passwordTwo){
-      console.log("killUser()")
       await noMatch();
     }else if(email.substr(email.length-8, email.length) != "@rpi.edu"){
       await noRPI();
